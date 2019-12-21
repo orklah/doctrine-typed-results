@@ -60,7 +60,8 @@ class EntityQueryBuilder extends TypedQueryBuilder
      */
     public function andWhere()
     {
-        parent::andWhere(...func_get_args());
+        $args = func_get_args(); // Local variable to help PSALM detect func_get_args
+        parent::andWhere(...$args);
         return $this;
     }
     /**
@@ -69,7 +70,8 @@ class EntityQueryBuilder extends TypedQueryBuilder
      */
     public function orWhere()
     {
-        parent::orWhere(...func_get_args());
+        $args = func_get_args(); // Local variable to help PSALM detect func_get_args
+        parent::orWhere(...$args);
         return $this;
     }
     /** @return static */
