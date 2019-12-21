@@ -56,13 +56,19 @@ class CustomQueryBuilder extends TypedQueryBuilder
         parent::where($predicates);
         return $this;
     }
-    /** @return static */
+    /**
+     * @param mixed $where
+     * @return static
+     */
     public function andWhere()
     {
         parent::andWhere(...func_get_args());
         return $this;
     }
-    /** @return static */
+    /**
+     * @param mixed $where
+     * @return static
+     */
     public function orWhere()
     {
         parent::orWhere(...func_get_args());
