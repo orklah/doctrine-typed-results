@@ -1,6 +1,7 @@
 {
   "type": "library",
   "license": "MIT",
+  "name": "orklah/doctrine-typed-results",
   "require": {
     "php": "^7.2",
     "doctrine/orm": "2.7.*"
