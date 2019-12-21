@@ -94,4 +94,17 @@ class BoolQueryBuilder extends TypedQueryBuilder
         parent::orHaving($having);
         return $this;
     }
+
+    /**
+     * @param string|Expr\OrderBy $sort The ordering expression.
+     * @param string $order The ordering direction.
+     *
+     * @return static
+     */
+    public function orderBy($sort, string $order = null)
+    {
+        parent::orderBy($sort, $order);
+
+        return $this;
+    }
 }
