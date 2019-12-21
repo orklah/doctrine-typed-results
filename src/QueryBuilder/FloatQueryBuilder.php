@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\QueryBuilder;
 
+use Doctrine\ORM\Query\Expr;
 use DoctrineTypedResults\Query\FloatQuery;
 use Doctrine\ORM\EntityManagerInterface;
 

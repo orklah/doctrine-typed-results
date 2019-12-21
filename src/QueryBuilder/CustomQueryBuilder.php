@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\QueryBuilder;
 
+use Doctrine\ORM\Query\Expr;
 use DoctrineTypedResults\Query\CustomQuery;
 use Doctrine\ORM\EntityManagerInterface;
 
