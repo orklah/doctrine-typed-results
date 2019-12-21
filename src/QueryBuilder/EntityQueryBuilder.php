@@ -106,4 +106,24 @@ class EntityQueryBuilder extends TypedQueryBuilder
 
         return $this;
     }
+
+    /**
+     * @param int $maxResults
+     * @return static
+     */
+    public function setMaxResults(int $maxResults)
+    {
+        parent::setMaxResults($maxResults);
+        return $this;
+    }
+
+    /**
+     * @param int $firstResult
+     * @return static
+     */
+    public function setFirstResult(int $firstResult)
+    {
+        parent::setFirstResult($firstResult);
+        return $this;
+    }
 }

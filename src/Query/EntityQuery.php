@@ -33,25 +33,4 @@ class EntityQuery extends TypedQuery
     {
         die('todo');
     }
-
-
-    /**
-     * @param int $maxResults
-     * @return EntityQuery
-     */
-    public function setMaxResults(int $maxResults)
-    {
-        $this->query->setMaxResults($maxResults);
-        return $this;
-    }
-
-    /**
-     * @param int $firstResult
-     * @return EntityQuery
-     */
-    public function setFirstResult(int $firstResult)
-    {
-        $this->query->setFirstResult($firstResult);
-        return $this;
-    }
 }

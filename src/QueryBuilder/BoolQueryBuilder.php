@@ -7,6 +7,7 @@ namespace DoctrineTypedResults\QueryBuilder;
 use Doctrine\ORM\Query\Expr;
 use DoctrineTypedResults\Query\BoolQuery;
 use Doctrine\ORM\EntityManagerInterface;
+use DoctrineTypedResults\Query\EntityQuery;
 
 class BoolQueryBuilder extends TypedQueryBuilder
 {
@@ -106,6 +107,26 @@ class BoolQueryBuilder extends TypedQueryBuilder
     {
         parent::orderBy($sort, $order);
 
+        return $this;
+    }
+    
+    /**
+     * @param int $maxResults
+     * @return static
+     */
+    public function setMaxResults(int $maxResults)
+    {
+        parent::setMaxResults($maxResults);
+        return $this;
+    }
+
+    /**
+     * @param int $firstResult
+     * @return static
+     */
+    public function setFirstResult(int $firstResult)
+    {
+        parent::setFirstResult($firstResult);
         return $this;
     }
 }
