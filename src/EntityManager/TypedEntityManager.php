@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
-class TypedEntityManager implements TypedEntityManagerInterface
+class TypedEntityManager
 {
     /**
      * @var EntityManager
@@ -185,6 +185,13 @@ class TypedEntityManager implements TypedEntityManagerInterface
     public function getReference(string $entityName, $id)
     {
         return $this->em->getReference($entityName, $id);
+    }
+
+    /**
+     * @return EntityManager
+     */
+    public function get(){
+        return $this->em;
     }
 
     /**
