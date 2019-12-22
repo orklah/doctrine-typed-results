@@ -33,7 +33,7 @@ abstract class TypedQuery
      * @param int $maxResults
      * @return static
      */
-    public function setMaxResults($maxResults)
+    public function setMaxResults(int $maxResults)
     {
         $this->query->setMaxResults($maxResults);
         return $this;
@@ -43,7 +43,7 @@ abstract class TypedQuery
      * @param int $firstResult
      * @return static
      */
-    public function setFirstResult($firstResult)
+    public function setFirstResult(int $firstResult)
     {
         $this->query->setFirstResult($firstResult);
         return $this;
