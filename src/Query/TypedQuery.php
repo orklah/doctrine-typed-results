@@ -28,4 +28,24 @@ abstract class TypedQuery
     {
         return $this->query;
     }
+
+    /**
+     * @param int $maxResults
+     * @return static
+     */
+    public function setMaxResults($maxResults)
+    {
+        $this->query->setMaxResults($maxResults);
+        return $this;
+    }
+
+    /**
+     * @param int $firstResult
+     * @return static
+     */
+    public function setFirstResult($firstResult)
+    {
+        $this->query->setFirstResult($firstResult);
+        return $this;
+    }
 }
