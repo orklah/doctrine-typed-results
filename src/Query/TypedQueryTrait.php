@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
+use BadMethodCallException;
 use Doctrine\ORM\Query;
 
 trait TypedQueryTrait
@@ -132,6 +133,6 @@ trait TypedQueryTrait
     
     public function _doExecute()
     {
-        return $this->query->_doExecute();
+        throw new BadMethodCallException('_doExecute method should not be called directly');
     }
 }
