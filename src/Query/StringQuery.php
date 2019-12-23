@@ -6,7 +6,6 @@ namespace DoctrineTypedResults\Query;
 
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query;
 use UnexpectedValueException;
 
 class StringQuery extends TypedQuery

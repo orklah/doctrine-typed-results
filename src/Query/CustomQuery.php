@@ -11,7 +11,19 @@ use Doctrine\ORM\Query;
 class CustomQuery extends TypedQuery
 {
     use TypedQueryTrait;
+
+    /** @var string */
+    private $type;
     
+    /**
+     * @param string $type
+     * @param Query $query
+     */
+    public function __construct(Query $query, $type)
+    {
+        parent::__construct($query);
+        $this->type = $type;
+    }
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException
