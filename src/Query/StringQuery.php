@@ -7,17 +7,12 @@ namespace DoctrineTypedResults\Query;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
+use UnexpectedValueException;
 
 class StringQuery extends TypedQuery
 {
-    /**
-     * @param Query $query
-     */
-    public function __construct(Query $query)
-    {
-        parent::__construct($query);
-    }
-
+    use TypedQueryTrait;
+    
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException
@@ -26,8 +21,11 @@ class StringQuery extends TypedQuery
      */
     public function getSingleScalarResult()
     {
-        assert(is_string($this->query->getSingleScalarResult()));
+        $result = $this->query->getSingleScalarResult();
+        if (!\is_string($result)) {
+            throw new UnexpectedValueException('Expected string, got "'. $result . '"');
+        }
 
-        return $this->query->getSingleScalarResult();
+        return $result;
     }
 }

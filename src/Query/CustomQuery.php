@@ -10,14 +10,8 @@ use Doctrine\ORM\Query;
 
 class CustomQuery extends TypedQuery
 {
-    /**
-     * @param Query $query
-     */
-    public function __construct(Query $query)
-    {
-        parent::__construct($query);
-    }
-
+    use TypedQueryTrait;
+    
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException

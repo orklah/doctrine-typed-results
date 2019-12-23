@@ -10,6 +10,8 @@ use Doctrine\ORM\Query;
 
 class EntityQuery extends TypedQuery
 {
+    use TypedQueryTrait;
+    
     /** @var string */
     private $type;
 

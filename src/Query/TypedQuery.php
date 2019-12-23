@@ -6,7 +6,7 @@ namespace DoctrineTypedResults\Query;
 
 use Doctrine\ORM\Query;
 
-abstract class TypedQuery
+abstract class TypedQuery implements QueryInterface
 {
     /**
      * @var Query
@@ -27,25 +27,5 @@ abstract class TypedQuery
     public function get()
     {
         return $this->query;
-    }
-
-    /**
-     * @param int $maxResults
-     * @return static
-     */
-    public function setMaxResults(int $maxResults)
-    {
-        $this->query->setMaxResults($maxResults);
-        return $this;
-    }
-
-    /**
-     * @param int $firstResult
-     * @return static
-     */
-    public function setFirstResult(int $firstResult)
-    {
-        $this->query->setFirstResult($firstResult);
-        return $this;
     }
 }

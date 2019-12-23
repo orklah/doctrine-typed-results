@@ -7,17 +7,12 @@ namespace DoctrineTypedResults\Query;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
+use UnexpectedValueException;
 
 class IntQuery extends TypedQuery
 {
-    /**
-     * @param Query $query
-     */
-    public function __construct(Query $query)
-    {
-        parent::__construct($query);
-    }
-
+    use TypedQueryTrait;
+    
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException
@@ -26,9 +21,12 @@ class IntQuery extends TypedQuery
      */
     public function getSingleScalarResult()
     {
-        assert(is_numeric($this->query->getSingleScalarResult()));
+        $result = $this->query->getSingleScalarResult();
+        if (!is_numeric($result)) {
+            throw new UnexpectedValueException('Expected int, got "'. $result . '"');
+        }
 
-        return (int)$this->query->getSingleScalarResult();
+        return (int)$result;
     }
 
     /**

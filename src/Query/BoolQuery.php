@@ -6,18 +6,12 @@ namespace DoctrineTypedResults\Query;
 
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query;
+use UnexpectedValueException;
 
 class BoolQuery extends TypedQuery
 {
-    /**
-     * @param Query $query
-     */
-    public function __construct(Query $query)
-    {
-        parent::__construct($query);
-    }
-
+    use TypedQueryTrait;
+    
     /**
      * @throws NoResultException
      * @throws NonUniqueResultException
@@ -26,8 +20,11 @@ class BoolQuery extends TypedQuery
      */
     public function getSingleScalarResult()
     {
-        assert(is_bool($this->query->getSingleScalarResult()));
+        $result = $this->query->getSingleScalarResult();
+        if (!\is_bool($result)) {
+            throw new UnexpectedValueException('Expected bool, got "'. $result . '"');
+        }
 
-        return $this->query->getSingleScalarResult();
+        return $result;
     }
 }
