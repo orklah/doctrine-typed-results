@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 
-abstract class TypedQueryBuilder extends QueryBuilder
+abstract class TypedQueryBuilder extends QueryBuilder implements QueryBuilderInterface
 {
     /** @var bool */
     protected $isArray;
@@ -16,14 +16,10 @@ abstract class TypedQueryBuilder extends QueryBuilder
     protected $type;
 
     /**
-     * @param EntityManagerInterface $em
-     * @param string $type
-     * @param bool $isArray
+     * @param $type
      */
-    public function __construct(EntityManagerInterface $em, string $type, bool $isArray = false)
+    public function setType(string $type)
     {
-        parent::__construct($em);
-        $this->isArray = $isArray;
         $this->type = $type;
     }
 }
