@@ -148,4 +148,9 @@ trait TypedQueryTrait
     {
         clone $this->query;
     }
+    
+    public function _doExecute()
+    {
+        return $this->query->_doExecute();
+    }
 }

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query;
 
-abstract class TypedQuery implements QueryInterface
+abstract class TypedQuery extends AbstractQuery implements QueryInterface
 {
     /**
      * @var Query
@@ -18,6 +19,7 @@ abstract class TypedQuery implements QueryInterface
      */
     public function __construct(Query $query)
     {
+        parent::__construct($query->getEntityManager());
         $this->query = $query;
     }
 
