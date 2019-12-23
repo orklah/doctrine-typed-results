@@ -257,7 +257,7 @@ interface QueryInterface
      *
      * @return \Doctrine\ORM\Internal\Hydration\IterableResult
      */
-    public function iterate($parameters = null, $hydrationMode = self::HYDRATE_OBJECT);
+    public function iterate($parameters = null, $hydrationMode = Query::HYDRATE_OBJECT);
 
     /**
      * {@inheritdoc}
