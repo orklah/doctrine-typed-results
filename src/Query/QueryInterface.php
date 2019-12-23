@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace DoctrineTypedResults\Query;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\TransactionRequiredException;
 
@@ -120,7 +121,7 @@ interface QueryInterface
      *
      * @param \Doctrine\Common\Cache\Cache|null $queryCache Cache driver.
      *
-     * @return Query This query instance.
+     * @return AbstractQuery This query instance.
      */
     public function setQueryCacheDriver($queryCache);
     /**
@@ -128,7 +129,7 @@ interface QueryInterface
      *
      * @param boolean $bool
      *
-     * @return Query This query instance.
+     * @return AbstractQuery This query instance.
      */
     public function useQueryCache($bool);
 
@@ -145,7 +146,7 @@ interface QueryInterface
      *
      * @param integer $timeToLive How long the cache entry is valid.
      *
-     * @return Query This query instance.
+     * @return AbstractQuery This query instance.
      */
     public function setQueryCacheLifetime($timeToLive);
 
@@ -160,7 +161,7 @@ interface QueryInterface
      *
      * @param boolean $expire Whether or not to force query cache expiration.
      *
-     * @return Query This query instance.
+     * @return AbstractQuery This query instance.
      */
     public function expireQueryCache($expire = true);
 
@@ -218,7 +219,7 @@ interface QueryInterface
      *
      * @param integer $firstResult The first result to return.
      *
-     * @return Query This query object.
+     * @return AbstractQuery This query object.
      */
     public function setFirstResult($firstResult);
 
@@ -235,7 +236,7 @@ interface QueryInterface
      *
      * @param integer|null $maxResults
      *
-     * @return Query This query object.
+     * @return AbstractQuery This query object.
      */
     public function setMaxResults($maxResults);
 
@@ -275,7 +276,7 @@ interface QueryInterface
      *
      * @param int $lockMode
      *
-     * @return Query
+     * @return AbstractQuery
      *
      * @throws TransactionRequiredException
      */
