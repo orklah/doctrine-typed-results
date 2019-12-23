@@ -92,7 +92,7 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @param int $maxResults
+     * @param int|null $maxResults
      * @return static
      */
     public function setMaxResults($maxResults)

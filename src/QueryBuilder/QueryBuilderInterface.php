@@ -6,9 +6,11 @@ declare(strict_types=1);
 namespace DoctrineTypedResults\QueryBuilder;
 
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr;
 
 interface QueryBuilderInterface
 {
@@ -139,7 +141,7 @@ interface QueryBuilderInterface
      *     $results = $q->execute();
      * </code>
      *
-     * @return Query
+     * @return AbstractQuery
      */
     public function getQuery();
 
