@@ -16,7 +16,7 @@ abstract class TypedQueryBuilder extends QueryBuilder implements QueryBuilderInt
     protected $type;
 
     /**
-     * @param $type
+     * @param string $type
      */
     public function setType(string $type)
     {

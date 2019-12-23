@@ -5,12 +5,14 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\QueryBuilder;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Parameter;
 
 interface QueryBuilderInterface
 {
@@ -176,7 +178,7 @@ interface QueryBuilderInterface
      *     $qb->getRootAliases(); // array('u')
      * </code>
      *
-     * @return array
+     * @return string[]
      */
     public function getRootAliases();
 
@@ -192,7 +194,7 @@ interface QueryBuilderInterface
      *
      *     $qb->getAllAliases(); // array('u','a')
      * </code>
-     * @return array
+     * @return string[]
      */
     public function getAllAliases();
 
@@ -208,7 +210,7 @@ interface QueryBuilderInterface
      *     $qb->getRootEntities(); // array('User')
      * </code>
      *
-     * @return array
+     * @return string[]
      */
     public function getRootEntities();
 
@@ -244,8 +246,9 @@ interface QueryBuilderInterface
      *             new Parameter('user_id2', 2)
      *        )));
      * </code>
-     *
-     * @param \Doctrine\Common\Collections\ArrayCollection|array $parameters The query parameters to set.
+     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
+     * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
+     * @param ArrayCollection|Parameter[] $parameters The query parameters to set.
      *
      * @return self
      */
@@ -254,7 +257,9 @@ interface QueryBuilderInterface
     /**
      * Gets all defined query parameters for the query being constructed.
      *
-     * @return \Doctrine\Common\Collections\ArrayCollection The currently defined query parameters.
+     * @phpstan-return ArrayCollection<array-key, Parameter>
+     * @psalm-return ArrayCollection<array-key, Parameter>
+     * @return ArrayCollection The currently defined query parameters.
      */
     public function getParameters();
 
@@ -307,9 +312,9 @@ interface QueryBuilderInterface
      * The available parts are: 'select', 'from', 'join', 'set', 'where',
      * 'groupBy', 'having' and 'orderBy'.
      *
-     * @param string       $dqlPartName The DQL part name.
-     * @param object|array $dqlPart     An Expr object.
-     * @param bool         $append      Whether to append (true) or replace (false).
+     * @param string         $dqlPartName The DQL part name.
+     * @param object|mixed[] $dqlPart     An Expr object.
+     * @param bool           $append      Whether to append (true) or replace (false).
      *
      * @return self
      */
@@ -713,7 +718,7 @@ interface QueryBuilderInterface
     /**
      * Gets all query parts.
      *
-     * @return array $dqlParts
+     * @return mixed[] $dqlParts
      *
      * @todo Rename: getQueryParts (or remove?)
      */
@@ -723,7 +728,7 @@ interface QueryBuilderInterface
     /**
      * Resets DQL parts.
      *
-     * @param array|null $parts
+     * @param string[]|null $parts
      *
      * @return self
      */

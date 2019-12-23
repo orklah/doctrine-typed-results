@@ -8,6 +8,10 @@ namespace DoctrineTypedResults\Query;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\AST\DeleteStatement;
+use Doctrine\ORM\Query\AST\SelectStatement;
+use Doctrine\ORM\Query\AST\UpdateStatement;
+use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\TransactionRequiredException;
 
 interface QueryInterface
@@ -110,9 +114,7 @@ interface QueryInterface
     /**
      * Returns the corresponding AST for this DQL query.
      *
-     * @return \Doctrine\ORM\Query\AST\SelectStatement |
-     *         \Doctrine\ORM\Query\AST\UpdateStatement |
-     *         \Doctrine\ORM\Query\AST\DeleteStatement
+     * @return SelectStatement|UpdateStatement|DeleteStatement
      */
     public function getAST();
 
@@ -252,7 +254,9 @@ interface QueryInterface
      * Executes the query and returns an IterableResult that can be used to incrementally
      * iterated over the result.
      *
-     * @param ArrayCollection|array|null $parameters    The query parameters.
+     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
+     * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
+     * @param ArrayCollection|Parameter[]|null $parameters    The query parameters.
      * @param string|int                 $hydrationMode The hydration mode to use.
      *
      * @return \Doctrine\ORM\Internal\Hydration\IterableResult
