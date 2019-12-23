@@ -15,6 +15,6 @@ class CustomQueryBuilder extends TypedQueryBuilder
      */
     public function getQuery()
     {
-        return new CustomQuery(parent::getQuery());
+        return new CustomQuery(parent::getQuery(), $this->type);
     }
 }
