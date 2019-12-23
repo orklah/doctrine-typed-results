@@ -98,25 +98,6 @@ trait TypedQueryTrait
     {
         return $this->query->getMaxResults();
     }
-    
-    public function iterate($parameters = null, $hydrationMode = Query::HYDRATE_OBJECT)
-    {
-        return $this->query->iterate($parameters, $hydrationMode);
-    }
-
-    /** @return static */
-    public function setHint($name, $value)
-    {
-        $this->query->setHint($name, $value);
-        return $this;
-    }
-
-    /** @return static */
-    public function setHydrationMode($hydrationMode)
-    {
-        $this->query->setHydrationMode($hydrationMode);
-        return $this;
-    }
 
     /** @return static */
     public function setLockMode($lockMode)
