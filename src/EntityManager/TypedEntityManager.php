@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use InvalidArgumentException;
 
 class TypedEntityManager
 {
@@ -27,7 +28,9 @@ class TypedEntityManager
      */
     public function __construct(EntityManagerInterface $em)
     {
-        assert($em instanceof EntityManager);
+        if (!$em instanceof EntityManager) {
+            throw new InvalidArgumentException('Expecting EntityManager, got '.\gettype($em));
+        }
         $this->em = $em;
     }
 
@@ -95,7 +98,9 @@ class TypedEntityManager
      */
     public function createEntityQueryBuilder(string $type)
     {
-        assert(class_exists($type));
+        if (!class_exists($type)) {
+            throw new InvalidArgumentException('Expecting existing class, got '.$type);
+        }
 
         return new EntityQueryBuilder($this->em, $type);
     }
@@ -190,7 +195,8 @@ class TypedEntityManager
     /**
      * @return EntityManager
      */
-    public function get(){
+    public function get()
+    {
         return $this->em;
     }
 
