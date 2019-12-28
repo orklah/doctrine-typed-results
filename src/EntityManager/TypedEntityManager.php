@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\EntityManager;
 
+use DoctrineTypedResults\Query\EntityQuery;
 use DoctrineTypedResults\QueryBuilder\BoolQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\EntityQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\FloatQueryBuilder;
@@ -117,6 +118,25 @@ class TypedEntityManager
 
         return new EntityQueryBuilder($this->em, $type, true);
     }*/
+
+    /**
+     * @template T
+     * @psalm-param class-string<T> $type
+     * @psalm-return EntityQuery<T>
+     *
+     * @param string $type
+     * @param string $dql
+     * @return EntityQuery
+     */
+    public function createEntityQuery(string $type, string $dql)
+    {
+        if (!class_exists($type)) {
+            throw new InvalidArgumentException('Expecting existing class, got '.$type);
+        }
+        $query = $this->em->createQuery($dql);
+
+        return new EntityQuery($query, $type);
+    }
     
     /**
      * @return IntQueryBuilder
