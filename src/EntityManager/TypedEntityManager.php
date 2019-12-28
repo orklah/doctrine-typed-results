@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\EntityManager;
 
+use DoctrineTypedResults\Query\BoolQuery;
 use DoctrineTypedResults\Query\EntityQuery;
+use DoctrineTypedResults\Query\FloatQuery;
+use DoctrineTypedResults\Query\IntQuery;
+use DoctrineTypedResults\Query\StringQuery;
 use DoctrineTypedResults\QueryBuilder\BoolQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\EntityQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\FloatQueryBuilder;
@@ -49,6 +53,17 @@ class TypedEntityManager
     }*/
 
     /**
+     * @param $dql
+     * @return IntQuery
+     */
+    public function createIntQuery(string $dql)
+    {
+        $query = $this->em->createQuery($dql);
+
+        return new IntQuery($query);
+    }
+
+    /**
      * @return FloatQueryBuilder
      */
     public function createFloatQueryBuilder()
@@ -63,6 +78,17 @@ class TypedEntityManager
         return new FloatQueryBuilder($this->em, $type, true);
     }*/
 
+    /**
+     * @param $dql
+     * @return FloatQuery
+     */
+    public function createFloatQuery(string $dql)
+    {
+        $query = $this->em->createQuery($dql);
+
+        return new FloatQuery($query);
+    }
+    
     /**
      * @return StringQueryBuilder
      */
@@ -79,6 +105,17 @@ class TypedEntityManager
     }*/
 
     /**
+     * @param $dql
+     * @return StringQuery
+     */
+    public function createStringQuery(string $dql)
+    {
+        $query = $this->em->createQuery($dql);
+
+        return new StringQuery($query);
+    }
+    
+    /**
      * @return BoolQueryBuilder
      */
     public function createBoolQueryBuilder()
@@ -93,6 +130,17 @@ class TypedEntityManager
         return new BoolQueryBuilder($this->em, $type, true);
     }*/
 
+    /**
+     * @param $dql
+     * @return BoolQuery
+     */
+    public function createBoolQuery(string $dql)
+    {
+        $query = $this->em->createQuery($dql);
+
+        return new BoolQuery($query);
+    }
+    
     /**
      * @template T
      * @psalm-param class-string<T> $type
@@ -144,6 +192,17 @@ class TypedEntityManager
     public function createCountQueryBuilder()
     {
         return new IntQueryBuilder($this->em);
+    }
+
+    /**
+     * @param string $dql
+     * @return IntQuery
+     */
+    public function createCountQuery(string $dql)
+    {
+        $query = $this->em->createQuery($dql);
+
+        return new IntQuery($query);
     }
 
     /**
