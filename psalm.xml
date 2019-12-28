@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<psalm
+    totallyTyped="false"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <!-- Don't have control over Doctrine Classes + Maintain old PHP version as possible? -->
+        <MissingReturnType errorLevel="suppress"/>
+        <MissingParamType errorLevel="suppress"/>
+        
+        <!-- TypedQuery implements AbstractQuery to behave like a Query but it's only a proxy to Query. 
+        Don't have to bother with internal mecanics of AbstractQuery -->
+        <PropertyNotSetInConstructor errorLevel="suppress"/>
+        
+        <!-- We want to override the implemented Type to return more specific types -->
+        <ImplementedReturnTypeMismatch errorLevel="suppress"/>
+        
+        <!-- Mismatch with psalm stubs. Not sure I understand why -->
+        <MethodSignatureMismatch errorLevel="suppress" />
+    </issueHandlers>
+<plugins><pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/></plugins></psalm>
