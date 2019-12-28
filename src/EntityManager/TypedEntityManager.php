@@ -15,7 +15,7 @@ use DoctrineTypedResults\QueryBuilder\FloatQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\IntQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\StringQueryBuilder;
 use Doctrine\ORM\EntityManager;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -143,6 +143,7 @@ class TypedEntityManager
     
     /**
      * @template T
+     * @template-typeof T $type
      * @psalm-param class-string<T> $type
      * @psalm-return EntityQueryBuilder<T>
      *
@@ -169,6 +170,7 @@ class TypedEntityManager
 
     /**
      * @template T
+     * @template-typeof T $type
      * @psalm-param class-string<T> $type
      * @psalm-return EntityQuery<T>
      *
@@ -215,10 +217,10 @@ class TypedEntityManager
 
     /**
      * @template T
+     * @template-typeof T $entityName
      *
      * @psalm-param class-string<T> $entityName
      * @phpstan-param class-string<T> $entityName
-     * @template-typeof T $entityName
      *
      * @return EntityRepository
      * @psalm-return ObjectRepository<T>
@@ -231,13 +233,13 @@ class TypedEntityManager
 
     /**
      * @template T
+     * @template-typeof T $entityName
      *
      * @param class-string<T> $entityName
-     * @template-typeof T $entityName
      *
      * @param mixed $id
      *
-     * @return EntityManager|null
+     * @return object|null
      * @psalm-return T|null
      * @phpstan-return T|null
      */
@@ -248,12 +250,13 @@ class TypedEntityManager
 
     /**
      * @template T
-     *
+     * @template-typeof T $entityName
+     * 
      * @param class-string<T> $entityName
      *
      * @param mixed $id
      *
-     * @return EntityManager|null
+     * @return object|null
      * @psalm-return T|null
      * @phpstan-return T|null
      */

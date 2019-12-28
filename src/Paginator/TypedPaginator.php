@@ -17,13 +17,15 @@ use DoctrineTypedResults\QueryBuilder\EntityQueryBuilder;
 class TypedPaginator
 {
     /**
+     * @psalm-var Paginator<T>
+     * @phpstan-var Paginator<T>
      * @var Paginator
      */
     private $paginator;
 
     /**
-     * @psalm-param EntityQuery<T>|EntityQueryBuilder<T>|TypedQuery|TypedQueryBuilder   $query
-     * @phpstan-param EntityQuery<T>|EntityQueryBuilder<T>|TypedQuery|TypedQueryBuilder $query
+     * @psalm-param EntityQuery<T>|EntityQueryBuilder<T> $query
+     * @phpstan-param EntityQuery<T>|EntityQueryBuilder<T> $query
      * @param TypedQueryBuilder|TypedQuery                           $query
      * @param bool                                                   $fetchJoinCollection
      */
