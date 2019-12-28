@@ -41,7 +41,8 @@ class TypedPaginator
      * @phpstan-return Paginator<T>
      * @return Paginator
      */
-    public function get(){
+    public function get()
+    {
         return $this->paginator;
     }
 }
