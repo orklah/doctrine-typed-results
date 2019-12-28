@@ -214,6 +214,55 @@ class TypedEntityManager
     }
 
     /**
+     * @template T
+     *
+     * @psalm-param class-string<T> $entityName
+     * @phpstan-param class-string<T> $entityName
+     * @template-typeof T $entityName
+     *
+     * @return EntityRepository
+     * @psalm-return ObjectRepository<T>
+     * @phpstan-return ObjectRepository<T>
+     */
+    public function getRepository(string $entityName)
+    {
+        return $this->em->getRepository($entityName);
+    }
+
+    /**
+     * @template T
+     *
+     * @param class-string<T> $entityName
+     * @template-typeof T $entityName
+     *
+     * @param mixed $id
+     *
+     * @return EntityManager|null
+     * @psalm-return T|null
+     * @phpstan-return T|null
+     */
+    public function find(string $entityName, $id, ?int $lockMode = null, ?int $lockVersion = null)
+    {
+        return $this->em->find($entityName, $id, $lockMode, $lockVersion);
+    }
+
+    /**
+     * @template T
+     *
+     * @param class-string<T> $entityName
+     *
+     * @param mixed $id
+     *
+     * @return EntityManager|null
+     * @psalm-return T|null
+     * @phpstan-return T|null
+     */
+    public function getReference(string $entityName, $id)
+    {
+        return $this->em->getReference($entityName, $id);
+    }
+
+    /**
      * @return EntityManager
      */
     public function get()
