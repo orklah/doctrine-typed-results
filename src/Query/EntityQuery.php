@@ -8,6 +8,8 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 
+use UnexpectedValueException;
+
 use function get_class;
 
 /**
@@ -44,13 +46,13 @@ class EntityQuery extends TypedQuery
     /**
      * @param string|int $hydrationMode
      * @psalm-return T
-     * @return mixed
+     * @return object
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
     public function getSingleResult($hydrationMode = null)
     {
-        $entity = parent::getSingleResult($hydrationMode);
+        $entity = $this->query->getSingleResult($hydrationMode);
         if (!$entity instanceof $this->type) {
             throw new UnexpectedValueException('Expected result to be instance of '.$this->type.' got '.get_class($entity).' instead');
         }
