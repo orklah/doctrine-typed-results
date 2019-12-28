@@ -8,6 +8,8 @@ namespace DoctrineTypedResults\Paginator;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineTypedResults\Query\TypedQuery;
 use DoctrineTypedResults\QueryBuilder\TypedQueryBuilder;
+use DoctrineTypedResults\Query\EntityQuery;
+use DoctrineTypedResults\QueryBuilder\EntityQueryBuilder;
 
 /**
  * @template T
@@ -20,8 +22,8 @@ class TypedPaginator
     private $paginator;
 
     /**
-     * @psalm-param EntityQuery<T>|TypedQueryBuilder<T>|TypedQuery   $query
-     * @phpstan-param EntityQuery<T>|TypedQueryBuilder<T>|TypedQuery $query
+     * @psalm-param EntityQuery<T>|EntityQueryBuilder<T>|TypedQuery|TypedQueryBuilder   $query
+     * @phpstan-param EntityQuery<T>|EntityQueryBuilder<T>|TypedQuery|TypedQueryBuilder $query
      * @param TypedQueryBuilder|TypedQuery                           $query
      * @param bool                                                   $fetchJoinCollection
      */
