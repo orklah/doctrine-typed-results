@@ -135,4 +135,11 @@ trait TypedQueryTrait
     {
         throw new BadMethodCallException('_doExecute method should not be called directly');
     }
+
+    /** @return static */
+    public function setParameter($key, $value, $type = null)
+    {
+        $this->query->setParameter($key, $value, $type);
+        return $this;
+    }
 }
