@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DoctrineTypedResults\EntityManager;
 
 use DoctrineTypedResults\QueryBuilder\BoolQueryBuilder;
-use DoctrineTypedResults\QueryBuilder\CustomQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\EntityQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\FloatQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\IntQueryBuilder;
@@ -118,23 +117,7 @@ class TypedEntityManager
 
         return new EntityQueryBuilder($this->em, $type, true);
     }*/
-
-    /**
-     * @param string $type
-     * @return CustomQueryBuilder
-     */
-    public function createCustomQueryBuilder(string $type)
-    {
-        $qb = new CustomQueryBuilder($this->em);
-        $qb->setType($type);
-        return $qb;
-    }
-
-    /*public function createCustomsQueryBuilder($type)
-    {
-        return new CustomQueryBuilder($this->em, $type, true);
-    }*/
-
+    
     /**
      * @return IntQueryBuilder
      */
