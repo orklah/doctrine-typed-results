@@ -11,6 +11,7 @@ use DoctrineTypedResults\QueryBuilder\FloatQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\IntQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\StringQueryBuilder;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -93,6 +94,10 @@ class TypedEntityManager
     }*/
 
     /**
+     * @template T
+     * @psalm-param class-string<T> $type
+     * @psalm-return EntityQueryBuilder<T>
+     *
      * @param string $type
      * @return EntityQueryBuilder
      */
@@ -154,8 +159,8 @@ class TypedEntityManager
      * @template-typeof T $entityName
      *
      * @return EntityRepository
-     * @psalm-return EntityRepository<T>
-     * @phpstan-return EntityRepository<T>
+     * @psalm-return ObjectRepository<T>
+     * @phpstan-return ObjectRepository<T>
      */
     public function getRepository(string $entityName)
     {
@@ -183,7 +188,6 @@ class TypedEntityManager
      * @template T
      *
      * @param class-string<T> $entityName
-     * @template-typeof T $entityName
      *
      * @param mixed $id
      *

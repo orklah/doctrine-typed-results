@@ -8,6 +8,11 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 
+use function get_class;
+
+/**
+ * @template T
+ */
 class EntityQuery extends TypedQuery
 {
     use TypedQueryTrait;
@@ -34,5 +39,21 @@ class EntityQuery extends TypedQuery
     public function getSingleScalarResult()
     {
         die('todo');
+    }
+
+    /**
+     * @param string|int $hydrationMode
+     * @psalm-return T
+     * @return mixed
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function getSingleResult($hydrationMode = null)
+    {
+        $entity = parent::getSingleResult($hydrationMode);
+        if (!$entity instanceof $this->type) {
+            throw new UnexpectedValueException('Expected result to be instance of '.$this->type.' got '.get_class($entity).' instead');
+        }
+        return $entity;
     }
 }
