@@ -8,6 +8,8 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use UnexpectedValueException;
 
+use function gettype;
+
 class IntQuery extends TypedQuery
 {
     use TypedQueryTrait;
@@ -22,7 +24,7 @@ class IntQuery extends TypedQuery
     {
         $result = $this->query->getSingleScalarResult();
         if (!is_numeric($result)) {
-            throw new UnexpectedValueException('Expected int, got "'. $result . '"');
+            throw new UnexpectedValueException('Expected int, got "'. gettype($result) . '"');
         }
 
         return (int)$result;

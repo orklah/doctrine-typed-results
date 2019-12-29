@@ -8,6 +8,9 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use UnexpectedValueException;
 
+use function gettype;
+use function is_string;
+
 class StringQuery extends TypedQuery
 {
     use TypedQueryTrait;
@@ -21,8 +24,8 @@ class StringQuery extends TypedQuery
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        if (!\is_string($result)) {
-            throw new UnexpectedValueException('Expected string, got "'. $result . '"');
+        if (!is_string($result)) {
+            throw new UnexpectedValueException('Expected string, got "'. gettype($result) . '"');
         }
 
         return $result;

@@ -8,6 +8,9 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use UnexpectedValueException;
 
+use function gettype;
+use function is_bool;
+
 class BoolQuery extends TypedQuery
 {
     use TypedQueryTrait;
@@ -21,8 +24,8 @@ class BoolQuery extends TypedQuery
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        if (!\is_bool($result)) {
-            throw new UnexpectedValueException('Expected bool, got "'. $result . '"');
+        if (!is_bool($result)) {
+            throw new UnexpectedValueException('Expected bool, got "'. gettype($result) . '"');
         }
 
         return $result;

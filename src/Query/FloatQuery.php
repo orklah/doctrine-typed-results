@@ -8,6 +8,8 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use UnexpectedValueException;
 
+use function gettype;
+
 class FloatQuery extends TypedQuery
 {
     use TypedQueryTrait;
@@ -22,7 +24,7 @@ class FloatQuery extends TypedQuery
     {
         $result = $this->query->getSingleScalarResult();
         if (!is_numeric($result)) {
-            throw new UnexpectedValueException('Expected float, got "'. $result . '"');
+            throw new UnexpectedValueException('Expected float, got "'. gettype($result) . '"');
         }
 
         return (float)$result;

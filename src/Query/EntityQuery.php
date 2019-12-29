@@ -11,6 +11,8 @@ use Doctrine\ORM\Query;
 use UnexpectedValueException;
 
 use function get_class;
+use function gettype;
+use function is_object;
 
 /**
  * @template T
@@ -19,11 +21,17 @@ class EntityQuery extends TypedQuery
 {
     use TypedQueryTrait;
     
-    /** @var string */
+    /**
+     * @psalm-var class-string<T>
+     * @phpstan-var class-string<T>
+     * @var string
+     */
     private $type;
 
     /**
      * @param string $type
+     * @psalm-param class-string<T> $type
+     * @phpstan-param class-string<T> $type
      * @param Query $query
      */
     public function __construct(Query $query, $type)
@@ -52,10 +60,14 @@ class EntityQuery extends TypedQuery
      */
     public function getSingleResult($hydrationMode = null)
     {
-        $entity = $this->query->getSingleResult($hydrationMode);
-        if (!$entity instanceof $this->type) {
-            throw new UnexpectedValueException('Expected result to be instance of '.$this->type.' got '.get_class($entity).' instead');
+        $result = $this->query->getSingleResult($hydrationMode);
+        if (!$result instanceof $this->type) {
+            if (is_object($result)) {
+                throw new UnexpectedValueException('Expected result to be instance of '.$this->type.' got '.get_class($result).' instead');
+            }
+
+            throw new UnexpectedValueException('Expected result to be instance of '.$this->type.' got '.gettype($result).' instead');
         }
-        return $entity;
+        return $result;
     }
 }
