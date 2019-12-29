@@ -13,8 +13,6 @@ use Doctrine\ORM\QueryBuilder;
  */
 abstract class TypedQueryBuilder extends QueryBuilder implements QueryBuilderInterface
 {
-    /** @var bool */
-    protected $isArray;
     /**
      * @phpstan-var class-string<T>
      * @psalm-var class-string<T>
