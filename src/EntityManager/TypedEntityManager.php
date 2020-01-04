@@ -142,10 +142,9 @@ class TypedEntityManager
     }
     
     /**
-     * @template T
-     * @template-typeof T $type
-     * @psalm-param class-string<T> $type
-     * @psalm-return EntityQueryBuilder<T>
+     * @template Entity
+     * @psalm-param class-string<Entity> $type
+     * @psalm-return EntityQueryBuilder<Entity>
      *
      * @param string $type
      * @return EntityQueryBuilder
@@ -169,10 +168,9 @@ class TypedEntityManager
     }*/
 
     /**
-     * @template T
-     * @template-typeof T $type
-     * @psalm-param class-string<T> $type
-     * @psalm-return EntityQuery<T>
+     * @template Entity
+     * @psalm-param class-string<Entity> $type
+     * @psalm-return EntityQuery<Entity>
      *
      * @param string $type
      * @param string $dql
@@ -216,15 +214,14 @@ class TypedEntityManager
     }
 
     /**
-     * @template T
-     * @template-typeof T $entityName
+     * @template Entity
      *
-     * @psalm-param class-string<T> $entityName
-     * @phpstan-param class-string<T> $entityName
+     * @psalm-param class-string<Entity> $entityName
+     * @phpstan-param class-string<Entity> $entityName
      *
-     * @return EntityRepository
-     * @psalm-return ObjectRepository<T>
-     * @phpstan-return ObjectRepository<T>
+     * @return ObjectRepository
+     * @psalm-return ObjectRepository<Entity>
+     * @phpstan-return ObjectRepository<Entity>
      */
     public function getRepository(string $entityName)
     {
@@ -232,16 +229,15 @@ class TypedEntityManager
     }
 
     /**
-     * @template T
-     * @template-typeof T $entityName
+     * @template Entity
      *
-     * @param class-string<T> $entityName
+     * @param class-string<Entity> $entityName
      *
      * @param mixed $id
      *
      * @return object|null
-     * @psalm-return T|null
-     * @phpstan-return T|null
+     * @psalm-return Entity|null
+     * @phpstan-return Entity|null
      */
     public function find(string $entityName, $id, ?int $lockMode = null, ?int $lockVersion = null)
     {
@@ -249,16 +245,15 @@ class TypedEntityManager
     }
 
     /**
-     * @template T
-     * @template-typeof T $entityName
+     * @template Entity
      * 
-     * @param class-string<T> $entityName
+     * @param class-string<Entity> $entityName
      *
      * @param mixed $id
      *
      * @return object|null
-     * @psalm-return T|null
-     * @phpstan-return T|null
+     * @psalm-return Entity|null
+     * @phpstan-return Entity|null
      */
     public function getReference(string $entityName, $id)
     {

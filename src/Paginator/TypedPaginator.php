@@ -12,20 +12,20 @@ use DoctrineTypedResults\Query\EntityQuery;
 use DoctrineTypedResults\QueryBuilder\EntityQueryBuilder;
 
 /**
- * @template T
+ * @template Entity
  */
 class TypedPaginator
 {
     /**
-     * @psalm-var Paginator<T>
-     * @phpstan-var Paginator<T>
+     * @psalm-var Paginator<Entity>
+     * @phpstan-var Paginator<Entity>
      * @var Paginator
      */
     private $paginator;
 
     /**
-     * @psalm-param EntityQuery<T>|EntityQueryBuilder<T> $query
-     * @phpstan-param EntityQuery<T>|EntityQueryBuilder<T> $query
+     * @psalm-param EntityQuery<Entity>|EntityQueryBuilder<Entity> $query
+     * @phpstan-param EntityQuery<Entity>|EntityQueryBuilder<Entity> $query
      * @param TypedQueryBuilder|TypedQuery                           $query
      * @param bool                                                   $fetchJoinCollection
      */
@@ -39,8 +39,8 @@ class TypedPaginator
     }
 
     /**
-     * @psalm-return Paginator<T>
-     * @phpstan-return Paginator<T>
+     * @psalm-return Paginator<Entity>
+     * @phpstan-return Paginator<Entity>
      * @return Paginator
      */
     public function get()

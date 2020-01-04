@@ -15,23 +15,23 @@ use function gettype;
 use function is_object;
 
 /**
- * @template T
+ * @template Entity
  */
 class EntityQuery extends TypedQuery
 {
     use TypedQueryTrait;
     
     /**
-     * @psalm-var class-string<T>
-     * @phpstan-var class-string<T>
+     * @psalm-var class-string<Entity>
+     * @phpstan-var class-string<Entity>
      * @var string
      */
     private $type;
 
     /**
      * @param string $type
-     * @psalm-param class-string<T> $type
-     * @phpstan-param class-string<T> $type
+     * @psalm-param class-string<Entity> $type
+     * @phpstan-param class-string<Entity> $type
      * @param Query $query
      */
     public function __construct(Query $query, $type)
@@ -53,7 +53,7 @@ class EntityQuery extends TypedQuery
 
     /**
      * @param string|int $hydrationMode
-     * @psalm-return T
+     * @psalm-return Entity
      * @return object
      * @throws NoResultException
      * @throws NonUniqueResultException

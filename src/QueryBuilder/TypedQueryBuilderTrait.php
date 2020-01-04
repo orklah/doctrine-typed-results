@@ -7,6 +7,8 @@ namespace DoctrineTypedResults\QueryBuilder;
 
 use Doctrine\ORM\Query\Expr;
 
+use function func_get_args;
+
 trait TypedQueryBuilderTrait
 {
     /**
