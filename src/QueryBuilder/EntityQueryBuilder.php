@@ -35,7 +35,7 @@ class EntityQueryBuilder extends TypedQueryBuilder
      * @psalm-param class-string<Entity> $type
      * @param string $type
      */
-    public function setType(string $type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
