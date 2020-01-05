@@ -38,8 +38,8 @@ class EntitiesQuery extends TypedQuery
     }
 
     /**
-     * @phpstan-return Entity[]
-     * @psalm-return Entity[]
+     * @phpstan-return list<Entity>
+     * @psalm-return list<Entity>
      * @param int|string $hydrationMode
      * @return object[]
      * @throws AssertionFailedException
@@ -70,8 +70,8 @@ class EntitiesQuery extends TypedQuery
     }
 
     /**
-     * @phpstan-return Entity[]
-     * @psalm-return Entity[]
+     * @phpstan-return list<Entity>
+     * @psalm-return list<Entity>
      * @return object[]
      * @throws AssertionFailedException
      */
