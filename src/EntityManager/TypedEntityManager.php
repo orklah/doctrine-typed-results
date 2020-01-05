@@ -256,7 +256,7 @@ class TypedEntityManager
     /**
      * @template Entity
      * @psalm-param class-string<Entity> $type
-     * @psalm-return EntityQuery<Entity>
+     * @psalm-return EntitiesQuery<Entity>
      *
      * @param string $type
      * @param string $dql
