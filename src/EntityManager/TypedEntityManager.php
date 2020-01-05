@@ -7,10 +7,15 @@ namespace DoctrineTypedResults\EntityManager;
 use Assert\Assertion;
 use Assert\AssertionFailedException;
 use DoctrineTypedResults\Query\BoolQuery;
+use DoctrineTypedResults\Query\BoolsQuery;
+use DoctrineTypedResults\Query\EntitiesQuery;
 use DoctrineTypedResults\Query\EntityQuery;
 use DoctrineTypedResults\Query\FloatQuery;
+use DoctrineTypedResults\Query\FloatsQuery;
 use DoctrineTypedResults\Query\IntQuery;
+use DoctrineTypedResults\Query\IntsQuery;
 use DoctrineTypedResults\Query\StringQuery;
+use DoctrineTypedResults\Query\StringsQuery;
 use DoctrineTypedResults\QueryBuilder\BoolQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\BoolsQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\EntitiesQueryBuilder;
@@ -73,6 +78,17 @@ class TypedEntityManager
     }
 
     /**
+     * @param $dql
+     * @return IntsQuery
+     */
+    public function createIntsQuery(string $dql)
+    {
+        $query = $this->em->createQuery($dql);
+
+        return new IntsQuery($query);
+    }
+
+    /**
      * @return FloatQueryBuilder
      */
     public function createFloatQueryBuilder()
@@ -97,6 +113,17 @@ class TypedEntityManager
         $query = $this->em->createQuery($dql);
 
         return new FloatQuery($query);
+    }
+
+    /**
+     * @param $dql
+     * @return FloatsQuery
+     */
+    public function createFloatsQuery(string $dql)
+    {
+        $query = $this->em->createQuery($dql);
+
+        return new FloatsQuery($query);
     }
     
     /**
@@ -125,6 +152,17 @@ class TypedEntityManager
 
         return new StringQuery($query);
     }
+
+    /**
+     * @param $dql
+     * @return StringsQuery
+     */
+    public function createStringsQuery(string $dql)
+    {
+        $query = $this->em->createQuery($dql);
+
+        return new StringsQuery($query);
+    }
     
     /**
      * @return BoolQueryBuilder
@@ -151,6 +189,17 @@ class TypedEntityManager
         $query = $this->em->createQuery($dql);
 
         return new BoolQuery($query);
+    }
+
+    /**
+     * @param $dql
+     * @return BoolsQuery
+     */
+    public function createBoolsQuery(string $dql)
+    {
+        $query = $this->em->createQuery($dql);
+
+        return new BoolsQuery($query);
     }
     
     /**
@@ -202,6 +251,24 @@ class TypedEntityManager
         $query = $this->em->createQuery($dql);
 
         return new EntityQuery($query, $type);
+    }
+
+    /**
+     * @template Entity
+     * @psalm-param class-string<Entity> $type
+     * @psalm-return EntityQuery<Entity>
+     *
+     * @param string $type
+     * @param string $dql
+     * @return EntitiesQuery
+     * @throws AssertionFailedException
+     */
+    public function createEntitiesQuery(string $type, string $dql)
+    {
+        Assertion::classExists($type, 'Expecting existing class, got "' . $type . '"');
+        $query = $this->em->createQuery($dql);
+
+        return new EntitiesQuery($query, $type);
     }
     
     /**
