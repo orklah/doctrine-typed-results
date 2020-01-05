@@ -4,39 +4,50 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
+use Assert\Assertion;
+use Assert\AssertionFailedException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use UnexpectedValueException;
 
 use function gettype;
 
 class FloatQuery extends TypedQuery
 {
     use TypedQueryTrait;
-    
+
     /**
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     *
      * @return float
+     * @throws AssertionFailedException
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        if (!is_numeric($result)) {
-            throw new UnexpectedValueException('Expected float, got "'. gettype($result) . '"');
-        }
+        Assertion::numeric($result, 'Expected float, got "'. gettype($result) . '"');
 
-        return (float)$result;
+        return (float)$result;// The cast is needed because Doctrine may return numeric values
     }
 
     /**
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     *
      * @return float
+     * @throws AssertionFailedException
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
     public function getFloatResult()
+    {
+        return $this->getSingleScalarResult();
+    }
+
+    /**
+     * @param null $hydrationMode
+     * @return float
+     * @throws AssertionFailedException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function getSingleResult($hydrationMode = null)
     {
         return $this->getSingleScalarResult();
     }

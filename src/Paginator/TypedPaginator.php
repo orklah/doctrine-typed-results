@@ -8,8 +8,6 @@ namespace DoctrineTypedResults\Paginator;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use DoctrineTypedResults\Query\TypedQuery;
 use DoctrineTypedResults\QueryBuilder\TypedQueryBuilder;
-use DoctrineTypedResults\Query\EntityQuery;
-use DoctrineTypedResults\QueryBuilder\EntityQueryBuilder;
 
 /**
  * @template Entity

@@ -6,7 +6,6 @@ declare(strict_types=1);
 namespace DoctrineTypedResults\Query;
 
 use BadMethodCallException;
-use Doctrine\ORM\Query;
 
 trait TypedQueryTrait
 {

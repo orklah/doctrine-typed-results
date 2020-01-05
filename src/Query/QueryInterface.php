@@ -184,7 +184,7 @@ interface QueryInterface
      *
      * @param string $dqlQuery DQL Query.
      *
-     * @return \Doctrine\ORM\AbstractQuery
+     * @return AbstractQuery
      */
     public function setDQL($dqlQuery);
 

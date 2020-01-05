@@ -4,30 +4,51 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
+use Assert\Assertion;
+use Assert\AssertionFailedException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use UnexpectedValueException;
 
 use function gettype;
-use function is_string;
 
 class StringQuery extends TypedQuery
 {
     use TypedQueryTrait;
     
     /**
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     *
      * @return string
+     * @throws AssertionFailedException
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        if (!is_string($result)) {
-            throw new UnexpectedValueException('Expected string, got "'. gettype($result) . '"');
-        }
+        Assertion::string($result, 'Expected string, got "'. gettype($result) . '"');
 
         return $result;
+    }
+
+    /**
+     * @return string
+     * @throws AssertionFailedException
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function getBoolResult()
+    {
+        return $this->getSingleScalarResult();
+    }
+
+    /**
+     * @param null $hydrationMode
+     * @return string
+     * @throws AssertionFailedException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function getSingleResult($hydrationMode = null)
+    {
+        return $this->getSingleScalarResult();
     }
 }

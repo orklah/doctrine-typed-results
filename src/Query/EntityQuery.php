@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
+use Assert\Assertion;
+use Assert\AssertionFailedException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 
-use UnexpectedValueException;
-
-use function get_class;
 use function gettype;
-use function is_object;
+use function is_string;
 
 /**
  * @template Entity
@@ -41,10 +40,7 @@ class EntityQuery extends TypedQuery
     }
 
     /**
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     *
-     * @return string
+     * @internal
      */
     public function getSingleScalarResult()
     {
@@ -55,19 +51,16 @@ class EntityQuery extends TypedQuery
      * @param string|int $hydrationMode
      * @psalm-return Entity
      * @return object
+     * @throws AssertionFailedException
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
-    public function getSingleResult($hydrationMode = null)
+    public function getSingleResult($hydrationMode = self::HYDRATE_OBJECT)
     {
+        Assertion::true($hydrationMode === self::HYDRATE_OBJECT, 'Expected ' . self::HYDRATE_OBJECT . ' got "' . $hydrationMode . '"');
         $result = $this->query->getSingleResult($hydrationMode);
-        if (!$result instanceof $this->type) {
-            if (is_object($result)) {
-                throw new UnexpectedValueException('Expected result to be instance of '.$this->type.' got '.get_class($result).' instead');
-            }
+        Assertion::isInstanceOf($result, $this->type, 'Expected result to be instance of ' . $this->type . ' got ' . gettype($result) . '('. (is_string($result) ? $result : '') . ')' . ' instead');
 
-            throw new UnexpectedValueException('Expected result to be instance of '.$this->type.' got '.gettype($result).' instead');
-        }
         return $result;
     }
 }

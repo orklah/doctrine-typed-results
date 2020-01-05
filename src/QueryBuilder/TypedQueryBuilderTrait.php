@@ -12,7 +12,6 @@ use Doctrine\ORM\Query\Expr;
 
 use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\Query\QueryException;
-use Doctrine\ORM\QueryBuilder;
 
 use function func_get_args;
 

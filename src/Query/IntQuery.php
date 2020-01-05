@@ -4,39 +4,50 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
+use Assert\Assertion;
+use Assert\AssertionFailedException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use UnexpectedValueException;
 
 use function gettype;
 
 class IntQuery extends TypedQuery
 {
     use TypedQueryTrait;
-    
+
     /**
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     *
      * @return int
+     * @throws AssertionFailedException
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        if (!is_numeric($result)) {
-            throw new UnexpectedValueException('Expected int, got "'. gettype($result) . '"');
-        }
+        Assertion::integerish($result, 'Expected int, got "'. gettype($result) . '"');
 
-        return (int)$result;
+        return (int)$result;// The cast is needed because Doctrine may return numeric values
     }
 
     /**
-     * @throws NoResultException
-     * @throws NonUniqueResultException
-     *
      * @return int
+     * @throws AssertionFailedException
+     * @throws NonUniqueResultException
+     * @throws NoResultException
      */
     public function getIntResult()
+    {
+        return $this->getSingleScalarResult();
+    }
+
+    /**
+     * @param null $hydrationMode
+     * @return int
+     * @throws AssertionFailedException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function getSingleResult($hydrationMode = null)
     {
         return $this->getSingleScalarResult();
     }

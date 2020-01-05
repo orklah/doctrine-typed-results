@@ -4,21 +4,27 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\EntityManager;
 
+use Assert\Assertion;
+use Assert\AssertionFailedException;
 use DoctrineTypedResults\Query\BoolQuery;
 use DoctrineTypedResults\Query\EntityQuery;
 use DoctrineTypedResults\Query\FloatQuery;
 use DoctrineTypedResults\Query\IntQuery;
 use DoctrineTypedResults\Query\StringQuery;
 use DoctrineTypedResults\QueryBuilder\BoolQueryBuilder;
+use DoctrineTypedResults\QueryBuilder\BoolsQueryBuilder;
+use DoctrineTypedResults\QueryBuilder\EntitiesQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\EntityQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\FloatQueryBuilder;
+use DoctrineTypedResults\QueryBuilder\FloatsQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\IntQueryBuilder;
+use DoctrineTypedResults\QueryBuilder\IntsQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\StringQueryBuilder;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use DoctrineTypedResults\QueryBuilder\StringsQueryBuilder;
 use InvalidArgumentException;
 
 class TypedEntityManager
@@ -47,10 +53,13 @@ class TypedEntityManager
         return new IntQueryBuilder($this->em);
     }
 
-    /*public function createIntsQueryBuilder()
+    /**
+     * @return IntsQueryBuilder
+     */
+    public function createIntsQueryBuilder()
     {
-        return new IntQueryBuilder($this->em, true);
-    }*/
+        return new IntsQueryBuilder($this->em);
+    }
 
     /**
      * @param $dql
@@ -71,12 +80,13 @@ class TypedEntityManager
         return new FloatQueryBuilder($this->em);
     }
 
-    /*public function createFloatsQueryBuilder($type)
+    /**
+     * @return FloatsQueryBuilder
+     */
+    public function createFloatsQueryBuilder()
     {
-        assert($this->isSupportedType($type));
-
-        return new FloatQueryBuilder($this->em, $type, true);
-    }*/
+        return new FloatsQueryBuilder($this->em);
+    }
 
     /**
      * @param $dql
@@ -97,12 +107,13 @@ class TypedEntityManager
         return new StringQueryBuilder($this->em);
     }
 
-    /*public function createStringsQueryBuilder($type)
+    /**
+     * @return StringsQueryBuilder
+     */
+    public function createStringsQueryBuilder()
     {
-        assert($this->isSupportedType($type));
-
-        return new StringQueryBuilder($this->em, $type, true);
-    }*/
+        return new StringsQueryBuilder($this->em);
+    }
 
     /**
      * @param $dql
@@ -123,12 +134,13 @@ class TypedEntityManager
         return new BoolQueryBuilder($this->em);
     }
 
-    /*public function createBoolsQueryBuilder($type)
+    /**
+     * @return BoolsQueryBuilder
+     */
+    public function createBoolsQueryBuilder()
     {
-        assert($this->isSupportedType($type));
-
-        return new BoolQueryBuilder($this->em, $type, true);
-    }*/
+        return new BoolsQueryBuilder($this->em);
+    }
 
     /**
      * @param $dql
@@ -158,12 +170,21 @@ class TypedEntityManager
         return new EntityQueryBuilder($this->em, $type);
     }
 
-    /*public function createEntitiesQueryBuilder($type)
+    /**
+     * @template Entity
+     * @psalm-param class-string<Entity> $type
+     * @psalm-return EntitiesQueryBuilder<Entity>
+     *
+     * @param string $type
+     * @return EntitiesQueryBuilder
+     * @throws AssertionFailedException
+     */
+    public function createEntitiesQueryBuilder(string $type)
     {
-        assert(class_exists($type));
-
-        return new EntityQueryBuilder($this->em, $type, true);
-    }*/
+        Assertion::classExists($type, 'Expecting existing class, got "' . $type . '"');
+        
+        return new EntitiesQueryBuilder($this->em, $type);
+    }
 
     /**
      * @template Entity
@@ -173,12 +194,11 @@ class TypedEntityManager
      * @param string $type
      * @param string $dql
      * @return EntityQuery
+     * @throws AssertionFailedException
      */
     public function createEntityQuery(string $type, string $dql)
     {
-        if (!class_exists($type)) {
-            throw new InvalidArgumentException('Expecting existing class, got '.$type);
-        }
+        Assertion::classExists($type, 'Expecting existing class, got "' . $type . '"');
         $query = $this->em->createQuery($dql);
 
         return new EntityQuery($query, $type);
@@ -264,15 +284,5 @@ class TypedEntityManager
     public function get()
     {
         return $this->em;
-    }
-
-    /**
-     * @param string $type
-     *
-     * @return bool
-     */
-    private function isSupportedType($type)
-    {
-        return in_array($type, ['string', 'int', 'bool', 'float'], true);
     }
 }
