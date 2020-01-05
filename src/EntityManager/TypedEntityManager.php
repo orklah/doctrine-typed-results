@@ -155,9 +155,7 @@ class TypedEntityManager
             throw new InvalidArgumentException('Expecting existing class, got '.$type);
         }
 
-        $qb = new EntityQueryBuilder($this->em);
-        $qb->setType($type);
-        return $qb;
+        return new EntityQueryBuilder($this->em, $type);
     }
 
     /*public function createEntitiesQueryBuilder($type)

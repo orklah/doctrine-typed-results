@@ -15,6 +15,6 @@ class FloatQueryBuilder extends TypedQueryBuilder
      */
     public function getQuery()
     {
-        return new FloatQuery(parent::getQuery());
+        return new FloatQuery($this->getQueryBuilder()->getQuery());
     }
 }

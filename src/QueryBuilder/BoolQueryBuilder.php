@@ -15,6 +15,6 @@ class BoolQueryBuilder extends TypedQueryBuilder
      */
     public function getQuery()
     {
-        return new BoolQuery(parent::getQuery());
+        return new BoolQuery($this->getQueryBuilder()->getQuery());
     }
 }

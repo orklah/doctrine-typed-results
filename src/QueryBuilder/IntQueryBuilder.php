@@ -13,6 +13,6 @@ class IntQueryBuilder extends TypedQueryBuilder
     /** @return IntQuery */
     public function getQuery()
     {
-        return new IntQuery(parent::getQuery());
+        return new IntQuery($this->getQueryBuilder()->getQuery());
     }
 }

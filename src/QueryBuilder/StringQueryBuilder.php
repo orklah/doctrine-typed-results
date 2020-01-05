@@ -15,6 +15,6 @@ class StringQueryBuilder extends TypedQueryBuilder
      */
     public function getQuery()
     {
-        return new StringQuery(parent::getQuery());
+        return new StringQuery($this->getQueryBuilder()->getQuery());
     }
 }
