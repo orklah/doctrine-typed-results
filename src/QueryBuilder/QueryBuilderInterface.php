@@ -21,7 +21,7 @@ interface QueryBuilderInterface
      *
      * @param EntityManagerInterface $em The EntityManager to use.
      */
-    public function __construct(EntityManagerInterface $em);
+    public function __construct(EntityManagerInterface $em, string $type);
 
     /**
      * Gets an ExpressionBuilder used for object-oriented construction of query expressions.
