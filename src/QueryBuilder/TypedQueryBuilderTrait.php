@@ -292,7 +292,9 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @param ArrayCollection|Parameter[] $parameters
+     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
+     * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
+     * @param ArrayCollection|Parameter[] $parameters The query parameters to set.
      * @return static
      */
     public function setParameters($parameters)
@@ -337,9 +339,9 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @param string       $dqlPartName
-     * @param object|array $dqlPart
-     * @param bool         $append
+     * @param string         $dqlPartName
+     * @param object|mixed[] $dqlPart
+     * @param bool           $append
      * @return static
      */
     public function add($dqlPartName, $dqlPart, $append = false)
@@ -511,7 +513,7 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @return array 
+     * @return mixed[]
      */
     public function getDQLParts()
     {
@@ -519,7 +521,7 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @param array|null $parts
+     * @param string[]|null $parts
      *
      * @return static
      */

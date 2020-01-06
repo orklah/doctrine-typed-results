@@ -129,8 +129,11 @@ trait TypedQueryTrait
     {
         clone $this->query;
     }
-    
-    public function _doExecute()
+
+    /**
+     * @return void
+     */
+    protected function _doExecute()
     {
         throw new BadMethodCallException('_doExecute method should not be called directly');
     }

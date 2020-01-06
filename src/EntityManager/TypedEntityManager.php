@@ -67,7 +67,7 @@ class TypedEntityManager
     }
 
     /**
-     * @param $dql
+     * @param string $dql
      * @return IntQuery
      */
     public function createIntQuery(string $dql)
@@ -78,7 +78,7 @@ class TypedEntityManager
     }
 
     /**
-     * @param $dql
+     * @param string $dql
      * @return IntsQuery
      */
     public function createIntsQuery(string $dql)
@@ -105,7 +105,7 @@ class TypedEntityManager
     }
 
     /**
-     * @param $dql
+     * @param string $dql
      * @return FloatQuery
      */
     public function createFloatQuery(string $dql)
@@ -116,7 +116,7 @@ class TypedEntityManager
     }
 
     /**
-     * @param $dql
+     * @param string $dql
      * @return FloatsQuery
      */
     public function createFloatsQuery(string $dql)
@@ -143,7 +143,7 @@ class TypedEntityManager
     }
 
     /**
-     * @param $dql
+     * @param string $dql
      * @return StringQuery
      */
     public function createStringQuery(string $dql)
@@ -154,7 +154,7 @@ class TypedEntityManager
     }
 
     /**
-     * @param $dql
+     * @param string $dql
      * @return StringsQuery
      */
     public function createStringsQuery(string $dql)
@@ -181,7 +181,7 @@ class TypedEntityManager
     }
 
     /**
-     * @param $dql
+     * @param string $dql
      * @return BoolQuery
      */
     public function createBoolQuery(string $dql)
@@ -192,7 +192,7 @@ class TypedEntityManager
     }
 
     /**
-     * @param $dql
+     * @param string $dql
      * @return BoolsQuery
      */
     public function createBoolsQuery(string $dql)

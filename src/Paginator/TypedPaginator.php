@@ -27,15 +27,11 @@ class TypedPaginator
      * @psalm-param EntitiesQuery<Entity>|EntitiesQueryBuilder<Entity>|TypedQueryBuilder|TypedQuery   $query
      * @phpstan-param EntitiesQuery<Entity>|EntitiesQueryBuilder<Entity>|TypedQueryBuilder|TypedQuery $query
      * @param EntitiesQuery|EntitiesQueryBuilder|TypedQueryBuilder|TypedQuery                         $query
-     * @param bool                                                                                $fetchJoinCollection
+     * @param bool                                                                                    $fetchJoinCollection
      */
     public function __construct($query, $fetchJoinCollection = true)
     {
-        if ($query instanceof TypedQuery) {
-            $this->paginator = new Paginator($query->get(), $fetchJoinCollection);
-        } else {
-            $this->paginator = new Paginator($query, $fetchJoinCollection);
-        }
+        $this->paginator = new Paginator($query->get(), $fetchJoinCollection);
     }
 
     /**
