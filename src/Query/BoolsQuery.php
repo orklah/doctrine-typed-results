@@ -18,7 +18,7 @@ class BoolsQuery extends TypedQuery
      */
     public function getResult($hydrationMode = self::HYDRATE_ARRAY)
     {
-        Assertion::true($hydrationMode === self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
+        Assertion::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
         $result =  parent::getResult($hydrationMode);
         Assertion::allNumeric($result, 'Expected a list of Bool');
 
