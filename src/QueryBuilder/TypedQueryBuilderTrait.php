@@ -170,7 +170,7 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @return string|null 
+     * @return string|null
      */
     public function getCacheRegion()
     {
@@ -222,7 +222,7 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @return EntityManager 
+     * @return EntityManager
      */
     public function getEntityManager()
     {
@@ -263,7 +263,7 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @return string[] 
+     * @return string[]
      */
     public function getAllAliases()
     {
@@ -279,9 +279,9 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @param string|int $key
-     * @param mixed          $value
-     * @param string|int|null    $type
+     * @param string|int      $key
+     * @param mixed           $value
+     * @param string|int|null $type
      *
      * @return static
      */
@@ -294,7 +294,7 @@ trait TypedQueryBuilderTrait
     /**
      * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
      * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
-     * @param ArrayCollection|Parameter[] $parameters The query parameters to set.
+     * @param ArrayCollection|Parameter[] $parameters
      * @return static
      */
     public function setParameters($parameters)
@@ -543,7 +543,7 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function __toString()
     {
