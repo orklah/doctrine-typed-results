@@ -41,7 +41,7 @@ class BoolQuery extends TypedQuery
     }
 
     /**
-     * @param null $hydrationMode
+     * @param string|int|null $hydrationMode
      * @return bool
      * @throws AssertionFailedException
      * @throws NoResultException

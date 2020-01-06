@@ -41,7 +41,7 @@ class IntQuery extends TypedQuery
     }
 
     /**
-     * @param null $hydrationMode
+     * @param string|int|null $hydrationMode
      * @return int
      * @throws AssertionFailedException
      * @throws NoResultException

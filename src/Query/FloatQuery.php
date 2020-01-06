@@ -41,7 +41,7 @@ class FloatQuery extends TypedQuery
     }
 
     /**
-     * @param null $hydrationMode
+     * @param string|int|null $hydrationMode
      * @return float
      * @throws AssertionFailedException
      * @throws NoResultException

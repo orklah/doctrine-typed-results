@@ -41,7 +41,7 @@ class StringQuery extends TypedQuery
     }
 
     /**
-     * @param null $hydrationMode
+     * @param string|int|null $hydrationMode
      * @return string
      * @throws AssertionFailedException
      * @throws NoResultException

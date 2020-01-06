@@ -48,7 +48,7 @@ class EntityQuery extends TypedQuery
     }
 
     /**
-     * @param string|int $hydrationMode
+     * @param string|int|null $hydrationMode
      * @psalm-return Entity
      * @return object
      * @throws AssertionFailedException
