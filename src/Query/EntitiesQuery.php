@@ -9,7 +9,6 @@ use Assert\AssertionFailedException;
 use Doctrine\ORM\Query;
 
 use function gettype;
-use function is_string;
 
 /**
  * @template Entity

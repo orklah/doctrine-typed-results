@@ -6,128 +6,130 @@ declare(strict_types=1);
 namespace DoctrineTypedResults\Query;
 
 use BadMethodCallException;
+use Doctrine\ORM\Query;
 
+/** @method Query getQuery() */
 trait TypedQueryTrait
 {
     public function getSQL()
     {
-        return $this->query->getSQL();
+        return $this->getQuery()->getSQL();
     }
 
     public function getAST()
     {
-        return $this->query->getAST();
+        return $this->getQuery()->getAST();
     }
 
     /** @return static */
     public function setQueryCacheDriver($queryCache)
     {
-        $this->query->setQueryCacheDriver($queryCache);
+        $this->getQuery()->setQueryCacheDriver($queryCache);
         return $this;
     }
 
     /** @return static */
     public function useQueryCache($bool)
     {
-        $this->query->useQueryCache($bool);
+        $this->getQuery()->useQueryCache($bool);
         return $this;
     }
     
     public function getQueryCacheDriver()
     {
-        return $this->query->getQueryCacheDriver();
+        return $this->getQuery()->getQueryCacheDriver();
     }
 
     /** @return static */
     public function setQueryCacheLifetime($timeToLive)
     {
-        $this->query->setQueryCacheLifetime($timeToLive);
+        $this->getQuery()->setQueryCacheLifetime($timeToLive);
         return $this;
     }
     
     public function getQueryCacheLifetime()
     {
-        return $this->query->getQueryCacheLifetime();
+        return $this->getQuery()->getQueryCacheLifetime();
     }
 
     /** @return static */
     public function expireQueryCache($expire = true)
     {
-        $this->query->expireQueryCache($expire);
+        $this->getQuery()->expireQueryCache($expire);
         return $this;
     }
     
     public function getExpireQueryCache()
     {
-        return $this->query->getExpireQueryCache();
+        return $this->getQuery()->getExpireQueryCache();
     }
     
     public function free()
     {
-        $this->query->free();
+        $this->getQuery()->free();
     }
 
     /** @return static */
     public function setDQL($dqlQuery)
     {
-        $this->query->setDQL($dqlQuery);
+        $this->getQuery()->setDQL($dqlQuery);
         return $this;
     }
     
     public function getDQL()
     {
-        return $this->query->getDQL();
+        return $this->getQuery()->getDQL();
     }
     
     public function getState()
     {
-        return $this->query->getState();
+        return $this->getQuery()->getState();
     }
     
     public function contains($dql)
     {
-        return $this->query->contains($dql);
+        return $this->getQuery()->contains($dql);
     }
     
     public function getFirstResult()
     {
-        return $this->query->getFirstResult();
+        return $this->getQuery()->getFirstResult();
     }
     
     public function getMaxResults()
     {
-        return $this->query->getMaxResults();
+        return $this->getQuery()->getMaxResults();
     }
 
     /** @return static */
     public function setLockMode($lockMode)
     {
-        $this->query->setLockMode($lockMode);
+        $this->getQuery()->setLockMode($lockMode);
         return $this;
     }
     
     public function getLockMode()
     {
-        return $this->query->getLockMode();
+        return $this->getQuery()->getLockMode();
     }
 
     /** @return static */
     public function setFirstResult($firstResult)
     {
-        $this->query->setFirstResult($firstResult);
+        $this->getQuery()->setFirstResult($firstResult);
         return $this;
     }
 
     /** @return static */
     public function setMaxResults($maxResults)
     {
-        $this->query->setMaxResults($maxResults);
+        $this->getQuery()->setMaxResults($maxResults);
         return $this;
     }
 
     public function __clone()
     {
-        clone $this->query;
+        clone $this->getQuery();
     }
 
     /**
@@ -141,7 +143,7 @@ trait TypedQueryTrait
     /** @return static */
     public function setParameter($key, $value, $type = null)
     {
-        $this->query->setParameter($key, $value, $type);
+        $this->getQuery()->setParameter($key, $value, $type);
         return $this;
     }
 }

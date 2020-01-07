@@ -331,7 +331,7 @@ class TypedEntityManager
 
     /**
      * @template Entity
-     * 
+     *
      * @param class-string<Entity> $entityName
      *
      * @param mixed $id

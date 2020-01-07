@@ -13,8 +13,11 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\Query\QueryException;
 
+use Doctrine\ORM\QueryBuilder;
+
 use function func_get_args;
 
+/** @method QueryBuilder getQueryBuilder() */
 trait TypedQueryBuilderTrait
 {
     /**
@@ -79,7 +82,9 @@ trait TypedQueryBuilderTrait
         $this->getQueryBuilder()->andHaving($having);
         return $this;
     }
-    /** @return static */
+    /**
+     * @return static
+     */
     public function orHaving($having)
     {
         $this->getQueryBuilder()->orHaving($having);

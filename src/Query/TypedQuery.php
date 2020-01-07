@@ -26,8 +26,16 @@ abstract class TypedQuery extends AbstractQuery implements QueryInterface
     /**
      * @return Query
      */
-    public function get()
+    public function getQuery()
     {
         return $this->query;
+    }
+    
+    /**
+     * Alias of getQuery
+     */
+    public function get()
+    {
+        return $this->getQuery();
     }
 }
