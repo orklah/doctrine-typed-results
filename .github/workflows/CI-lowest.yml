@@ -14,4 +14,4 @@ jobs:
         with:
           php-version: 7.4
           extensions: mbstring
-      - run: composer update --prefer-lowest --no-dev && vendor/bin/phpunit tests/
+      - run: composer update --prefer-lowest && vendor/bin/phpunit tests/
