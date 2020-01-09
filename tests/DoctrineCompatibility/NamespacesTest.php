@@ -32,27 +32,27 @@ final class NamespacesTest extends TestCase
 {
     public function testClassNamespace()
     {
-        self::assertTrue(class_exists(EntityManager::class));
-        self::assertTrue(class_exists(QueryBuilder::class));
-        self::assertTrue(class_exists(Paginator::class));
-        self::assertTrue(class_exists(NonUniqueResultException::class));
-        self::assertTrue(class_exists(NoResultException::class));
-        self::assertTrue(class_exists(Query::class));
-        self::assertTrue(class_exists(ArrayCollection::class));
-        self::assertTrue(class_exists(AbstractQuery::class));
-        self::assertTrue(class_exists(DeleteStatement::class));
-        self::assertTrue(class_exists(SelectStatement::class));
-        self::assertTrue(class_exists(UpdateStatement::class));
-        self::assertTrue(class_exists(Parameter::class));
-        self::assertTrue(class_exists(TransactionRequiredException::class));
-        self::assertTrue(class_exists(Criteria::class));
-        self::assertTrue(class_exists(Expr::class));
-        self::assertTrue(class_exists(QueryException::class));
+        self::assertTrue(class_exists(EntityManager::class), EntityManager::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(QueryBuilder::class), QueryBuilder::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(Paginator::class), Paginator::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(NonUniqueResultException::class), NonUniqueResultException::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(NoResultException::class), NoResultException::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(Query::class), Query::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(ArrayCollection::class), ArrayCollection::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(AbstractQuery::class), AbstractQuery::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(DeleteStatement::class), DeleteStatement::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(SelectStatement::class), SelectStatement::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(UpdateStatement::class), UpdateStatement::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(Parameter::class), Parameter::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(TransactionRequiredException::class), TransactionRequiredException::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(Criteria::class), Criteria::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(Expr::class), Expr::class . ' could not be autoloaded');
+        self::assertTrue(class_exists(QueryException::class), QueryException::class . ' could not be autoloaded');
     }
 
     public function testInterfaceNamespace()
     {
-        self::assertTrue(interface_exists(ObjectRepository::class));
-        self::assertTrue(interface_exists(EntityManagerInterface::class));
+        self::assertTrue(interface_exists(ObjectRepository::class), ObjectRepository::class . ' could not be autoloaded');
+        self::assertTrue(interface_exists(EntityManagerInterface::class), EntityManagerInterface::class . ' could not be autoloaded');
     }
 }
