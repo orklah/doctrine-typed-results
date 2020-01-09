@@ -1,5 +1,7 @@
 # doctrine-typed-results
 
-see if it's possible to factorise methods in QueryBuilders (inheritance? traits?)
-check that all methods are overriden
-check if there's a better solution to Query->get(). Maybe create TypedPaginator?
+## TODO
+- Allow disabling assertions (gain performance but reduce runtime checks)
+- Investigate on Template inheritance(@extends/@template-extends): https://psalm.dev/docs/annotating_code/templated_annotations/
+- make sure every method in Query is in QueryInterface (not only in AbstractQuery) and simplify test
+- add more tests (static analysis correctness and functionnality)
