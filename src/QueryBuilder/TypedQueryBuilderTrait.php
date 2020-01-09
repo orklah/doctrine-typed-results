@@ -131,12 +131,12 @@ trait TypedQueryBuilderTrait
 
 
 
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 
     /**
      * @return Expr
@@ -554,7 +554,7 @@ trait TypedQueryBuilderTrait
     {
         return $this->getQueryBuilder()->__toString();
     }
-    
+
     public function __clone()
     {
         clone $this->getQueryBuilder();

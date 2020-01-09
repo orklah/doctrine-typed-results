@@ -19,7 +19,7 @@ use function is_string;
 class EntityQuery extends TypedQuery
 {
     use TypedQueryTrait;
-    
+
     /**
      * @psalm-var class-string<Entity>
      * @phpstan-var class-string<Entity>

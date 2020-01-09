@@ -20,7 +20,7 @@ class EntityQueryBuilder extends TypedQueryBuilder
      * @var string
      */
     protected $type;
-    
+
     /**
      * @phpstan-param class-string<Entity> $type
      * @psalm-param class-string<Entity> $type
@@ -32,7 +32,7 @@ class EntityQueryBuilder extends TypedQueryBuilder
         parent::__construct($em);
         $this->type = $type;
     }
-    
+
     /**
      * @return EntityQuery
      * @psalm-return EntityQuery<Entity>

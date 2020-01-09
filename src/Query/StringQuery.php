@@ -14,7 +14,7 @@ use function gettype;
 class StringQuery extends TypedQuery
 {
     use TypedQueryTrait;
-    
+
     /**
      * @return string
      * @throws AssertionFailedException

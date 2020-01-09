@@ -21,7 +21,7 @@ class IntsQuery extends TypedQuery
         Assertion::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
         $result =  parent::getResult($hydrationMode);
         Assertion::allIntegerish($result, 'Expected a list of Int');
-        
+
         return array_map('\intval', $result);// The cast is needed because Doctrine may return numeric values
     }
 

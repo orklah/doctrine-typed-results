@@ -30,7 +30,7 @@ abstract class TypedQuery extends AbstractQuery implements QueryInterface
     {
         return $this->query;
     }
-    
+
     /**
      * Alias of getQuery
      */

@@ -125,7 +125,7 @@ class TypedEntityManager
 
         return new FloatsQuery($query);
     }
-    
+
     /**
      * @return StringQueryBuilder
      */
@@ -163,7 +163,7 @@ class TypedEntityManager
 
         return new StringsQuery($query);
     }
-    
+
     /**
      * @return BoolQueryBuilder
      */
@@ -201,7 +201,7 @@ class TypedEntityManager
 
         return new BoolsQuery($query);
     }
-    
+
     /**
      * @template Entity
      * @psalm-param class-string<Entity> $type
@@ -231,7 +231,7 @@ class TypedEntityManager
     public function createEntitiesQueryBuilder(string $type)
     {
         Assertion::classExists($type, 'Expecting existing class, got "' . $type . '"');
-        
+
         return new EntitiesQueryBuilder($this->em, $type);
     }
 
@@ -270,7 +270,7 @@ class TypedEntityManager
 
         return new EntitiesQuery($query, $type);
     }
-    
+
     /**
      * @return IntQueryBuilder
      */

@@ -16,7 +16,7 @@ use function gettype;
 class EntitiesQuery extends TypedQuery
 {
     use TypedQueryTrait;
-    
+
     /**
      * @psalm-var class-string<Entity>
      * @phpstan-var class-string<Entity>

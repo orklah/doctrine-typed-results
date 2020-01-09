@@ -18,7 +18,7 @@ abstract class TypedQueryBuilder implements QueryBuilderInterface
     {
         $this->queryBuilder = new QueryBuilder($em);
     }
-    
+
     public function getQueryBuilder(): QueryBuilder
     {
         return $this->queryBuilder;

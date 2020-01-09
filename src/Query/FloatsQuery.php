@@ -24,7 +24,7 @@ class FloatsQuery extends TypedQuery
 
         return array_map('\floatval', $result);// The cast is needed because Doctrine may return numeric values
     }
-    
+
     /**
      * @internal
      */

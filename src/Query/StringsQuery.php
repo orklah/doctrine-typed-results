@@ -24,7 +24,7 @@ class StringsQuery extends TypedQuery
 
         return $result;
     }
-    
+
     /**
      * @internal
      */

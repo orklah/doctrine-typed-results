@@ -34,7 +34,7 @@ trait TypedQueryTrait
         $this->getQuery()->useQueryCache($bool);
         return $this;
     }
-    
+
     public function getQueryCacheDriver()
     {
         return $this->getQuery()->getQueryCacheDriver();
@@ -46,7 +46,7 @@ trait TypedQueryTrait
         $this->getQuery()->setQueryCacheLifetime($timeToLive);
         return $this;
     }
-    
+
     public function getQueryCacheLifetime()
     {
         return $this->getQuery()->getQueryCacheLifetime();
@@ -58,12 +58,12 @@ trait TypedQueryTrait
         $this->getQuery()->expireQueryCache($expire);
         return $this;
     }
-    
+
     public function getExpireQueryCache()
     {
         return $this->getQuery()->getExpireQueryCache();
     }
-    
+
     public function free()
     {
         $this->getQuery()->free();
@@ -75,27 +75,27 @@ trait TypedQueryTrait
         $this->getQuery()->setDQL($dqlQuery);
         return $this;
     }
-    
+
     public function getDQL()
     {
         return $this->getQuery()->getDQL();
     }
-    
+
     public function getState()
     {
         return $this->getQuery()->getState();
     }
-    
+
     public function contains($dql)
     {
         return $this->getQuery()->contains($dql);
     }
-    
+
     public function getFirstResult()
     {
         return $this->getQuery()->getFirstResult();
     }
-    
+
     public function getMaxResults()
     {
         return $this->getQuery()->getMaxResults();
@@ -107,7 +107,7 @@ trait TypedQueryTrait
         $this->getQuery()->setLockMode($lockMode);
         return $this;
     }
-    
+
     public function getLockMode()
     {
         return $this->getQuery()->getLockMode();
