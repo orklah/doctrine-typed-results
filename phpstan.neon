@@ -1,0 +1,13 @@
+parameters:
+	ignoreErrors:
+		# inheritance and overriding return types with mine
+		- '#.+should be compatible with return type.+#'
+
+		# no control over doctrine classes + compatibilty with old versions
+		- '#.+has no return typehint specified.#'
+		- '#.+with no typehint specified.#'
+		
+		# func_get_args
+		- '#PHPDoc tag @param references unknown parameter: \$where#'
+		
+	level: max
