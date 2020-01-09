@@ -1,0 +1,17 @@
+name: CI-lowest
+
+on: [push, pull_request]
+
+jobs:
+
+  checks:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 7.4
+          extensions: mbstring
+      - run: composer update --prefer-lowest --no-dev && vendor/bin/phpunit tests/

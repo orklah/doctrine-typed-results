@@ -1,0 +1,53 @@
+name: CI-unix
+
+on: [push, pull_request]
+
+jobs:
+
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 7.4
+          extensions: mbstring
+      - run: composer require phpstan/phpstan && composer require phpstan/phpstan-doctrine && composer require phpstan/extension-installer && vendor/bin/phpstan analyse src --level max
+
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 7.4
+          extensions: mbstring
+      - run: composer require friendsofphp/php-cs-fixer && vendor/bin/php-cs-fixer fix --diff --dry-run --allow-risky=yes
+
+  psalm:
+    name: Psalm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 7.4
+          extensions: mbstring
+      - run: composer require vimeo/psalm && composer require weirdan/doctrine-psalm-plugin && vendor/bin/psalm
+        
+  checks:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 7.4
+          extensions: mbstring
+      - run: composer update --no-dev && vendor/bin/phpunit tests/

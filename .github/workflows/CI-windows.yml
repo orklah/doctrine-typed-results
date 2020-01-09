@@ -1,0 +1,17 @@
+name: CI-windows
+
+on: [push, pull_request]
+
+jobs:
+
+  checks:
+    name: PHPUnit
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 7.4
+          extensions: mbstring, pdo_sqlite
+      - run: composer update --no-dev ; vendor/bin/phpunit
