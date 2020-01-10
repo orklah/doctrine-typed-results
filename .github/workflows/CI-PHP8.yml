@@ -17,6 +17,18 @@ jobs:
         with:
           php-version: 8.0
           extensions: mbstring
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+          
       - run: composer require phpstan/phpstan --ignore-platform-reqs && composer require phpstan/phpstan-doctrine --ignore-platform-reqs && composer require phpstan/extension-installer --ignore-platform-reqs && vendor/bin/phpstan analyse src --level max
 
   php-cs-fixer:
@@ -29,6 +41,18 @@ jobs:
         with:
           php-version: 8.0
           extensions: mbstring
+          
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+          
       - run: composer require friendsofphp/php-cs-fixer --ignore-platform-reqs && PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --diff --dry-run --allow-risky=yes
 
   psalm:
@@ -41,6 +65,18 @@ jobs:
         with:
           php-version: 8.0
           extensions: mbstring
+          
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+          
       - run: composer require vimeo/psalm --ignore-platform-reqs && composer require weirdan/doctrine-psalm-plugin --ignore-platform-reqs && vendor/bin/psalm
 
 # BetterReflection library is not yet ready for PHP8
