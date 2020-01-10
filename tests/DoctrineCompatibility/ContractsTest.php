@@ -22,7 +22,6 @@ final class ContractsTest extends TestCase
 {
     /**
      * @throws ReflectionException
-     * @todo: it should not be necessary to check AbstractQuery. Every method in Query should be in contract
      */
     public function testQueryContract()
     {
@@ -30,7 +29,7 @@ final class ContractsTest extends TestCase
         foreach ($refl->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             if ($method->getName() !== '__construct') {
                 self::assertTrue(
-                    method_exists(QueryInterface::class, $method->getName()) || (method_exists(AbstractQuery::class, $method->getName()) && !$method->isAbstract()),
+                    method_exists(QueryInterface::class, $method->getName()),
                     $method->getName().' was not found in '.QueryInterface::class
                 );
             }

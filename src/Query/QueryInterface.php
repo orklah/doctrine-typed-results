@@ -5,299 +5,418 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
+use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Cache\QueryCacheProfile;
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Internal\Hydration\IterableResult;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\ORMException;
+use Doctrine\ORM\ORMInvalidArgumentException;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\AST\DeleteStatement;
 use Doctrine\ORM\Query\AST\SelectStatement;
 use Doctrine\ORM\Query\AST\UpdateStatement;
 use Doctrine\ORM\Query\Parameter;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\TransactionRequiredException;
 
 interface QueryInterface
 {
     /**
-     * A query object is in CLEAN state when it has NO unparsed/unprocessed DQL parts.
-     */
-    const STATE_CLEAN  = 1;
-
-    /**
-     * A query object is in state DIRTY when it has DQL parts that have not yet been
-     * parsed/processed. This is automatically defined as DIRTY when addDqlQueryPart
-     * is called.
-     */
-    const STATE_DIRTY = 2;
-
-    /* Query HINTS */
-
-    /**
-     * The refresh hint turns any query into a refresh query with the result that
-     * any local changes in entities are overridden with the fetched values.
-     *
-     * @var string
-     */
-    const HINT_REFRESH = 'doctrine.refresh';
-
-    /**
-     * @var string
-     */
-    const HINT_CACHE_ENABLED = 'doctrine.cache.enabled';
-
-    /**
-     * @var string
-     */
-    const HINT_CACHE_EVICT = 'doctrine.cache.evict';
-
-    /**
-     * Internal hint: is set to the proxy entity that is currently triggered for loading
-     *
-     * @var string
-     */
-    const HINT_REFRESH_ENTITY = 'doctrine.refresh.entity';
-
-    /**
-     * The forcePartialLoad query hint forces a particular query to return
-     * partial objects.
-     *
-     * @var string
-     * @todo Rename: HINT_OPTIMIZE
-     */
-    const HINT_FORCE_PARTIAL_LOAD = 'doctrine.forcePartialLoad';
-
-    /**
-     * The includeMetaColumns query hint causes meta columns like foreign keys and
-     * discriminator columns to be selected and returned as part of the query result.
-     *
-     * This hint does only apply to non-object queries.
-     *
-     * @var string
-     */
-    const HINT_INCLUDE_META_COLUMNS = 'doctrine.includeMetaColumns';
-
-    /**
-     * An array of class names that implement \Doctrine\ORM\Query\TreeWalker and
-     * are iterated and executed after the DQL has been parsed into an AST.
-     *
-     * @var string
-     */
-    const HINT_CUSTOM_TREE_WALKERS = 'doctrine.customTreeWalkers';
-
-    /**
-     * A string with a class name that implements \Doctrine\ORM\Query\TreeWalker
-     * and is used for generating the target SQL from any DQL AST tree.
-     *
-     * @var string
-     */
-    const HINT_CUSTOM_OUTPUT_WALKER = 'doctrine.customOutputWalker';
-
-    //const HINT_READ_ONLY = 'doctrine.readOnly';
-
-    /**
-     * @var string
-     */
-    const HINT_INTERNAL_ITERATION = 'doctrine.internal.iteration';
-
-    /**
-     * @var string
-     */
-    const HINT_LOCK_MODE = 'doctrine.lockMode';
-
-    /**
-     * Gets the SQL query/queries that correspond to this DQL query.
-     *
-     * @return mixed The built sql query or an array of all sql queries.
-     *
-     * @override
+     * @return mixed
      */
     public function getSQL();
 
     /**
-     * Returns the corresponding AST for this DQL query.
-     *
      * @return SelectStatement|UpdateStatement|DeleteStatement
      */
     public function getAST();
 
     /**
-     * Defines a cache driver to be used for caching queries.
-     *
-     * @param \Doctrine\Common\Cache\Cache|null $queryCache Cache driver.
-     *
-     * @return AbstractQuery This query instance.
+     * @param Cache|null $queryCache
+     * @return AbstractQuery
      */
     public function setQueryCacheDriver($queryCache);
+    
     /**
-     * Defines whether the query should make use of a query cache, if available.
-     *
-     * @param boolean $bool
-     *
-     * @return AbstractQuery This query instance.
+     * @param bool $bool
+     * @return AbstractQuery
      */
     public function useQueryCache($bool);
 
     /**
-     * Returns the cache driver used for query caching.
-     *
-     * @return \Doctrine\Common\Cache\Cache|null The cache driver used for query caching or NULL, if
-     *                                           this Query does not use query caching.
+     * @return Cache|null
      */
     public function getQueryCacheDriver();
 
     /**
-     * Defines how long the query cache will be active before expire.
-     *
-     * @param integer $timeToLive How long the cache entry is valid.
-     *
-     * @return AbstractQuery This query instance.
+     * @param int $timeToLive
+     * @return AbstractQuery
      */
     public function setQueryCacheLifetime($timeToLive);
 
     /**
-     * Retrieves the lifetime of resultset cache.
-     *
      * @return int
      */
     public function getQueryCacheLifetime();
+    
     /**
-     * Defines if the query cache is active or not.
-     *
-     * @param boolean $expire Whether or not to force query cache expiration.
-     *
-     * @return AbstractQuery This query instance.
+     * @param bool $expire
+     * @return AbstractQuery
      */
     public function expireQueryCache($expire = true);
 
     /**
-     * Retrieves if the query cache is active or not.
-     *
      * @return bool
      */
     public function getExpireQueryCache();
-
-    /**
-     * @override
-     */
+    
     public function free();
 
     /**
-     * Sets a DQL query string.
-     *
-     * @param string $dqlQuery DQL Query.
-     *
+     * @param string $dqlQuery
      * @return AbstractQuery
      */
     public function setDQL($dqlQuery);
 
     /**
-     * Returns the DQL query that is represented by this query object.
-     *
      * @return string|null
      */
     public function getDQL();
 
     /**
-     * Returns the state of this query object
-     * By default the type is Doctrine_ORM_Query_Abstract::STATE_CLEAN but if it appears any unprocessed DQL
-     * part, it is switched to Doctrine_ORM_Query_Abstract::STATE_DIRTY.
-     *
-     * @see AbstractQuery::STATE_CLEAN
-     * @see AbstractQuery::STATE_DIRTY
-     *
-     * @return integer The query state.
+     * @return int
      */
     public function getState();
 
     /**
-     * Method to check if an arbitrary piece of DQL exists
-     *
-     * @param string $dql Arbitrary piece of DQL to check for.
-     *
-     * @return boolean
+     * @param string $dql
+     * @return bool
      */
     public function contains($dql);
 
     /**
-     * Sets the position of the first result to retrieve (the "offset").
-     *
-     * @param integer $firstResult The first result to return.
-     *
-     * @return AbstractQuery This query object.
+     * @param int $firstResult
+     * @return AbstractQuery
      */
     public function setFirstResult($firstResult);
 
     /**
-     * Gets the position of the first result the query object was set to retrieve (the "offset").
-     * Returns NULL if {@link setFirstResult} was not applied to this query.
-     *
-     * @return int|null The position of the first result.
+     * @return int|null
      */
     public function getFirstResult();
 
     /**
-     * Sets the maximum number of results to retrieve (the "limit").
-     *
-     * @param integer|null $maxResults
-     *
-     * @return AbstractQuery This query object.
+     * @param int|null $maxResults
+     * @return AbstractQuery
      */
     public function setMaxResults($maxResults);
 
     /**
-     * Gets the maximum number of results the query object was set to retrieve (the "limit").
-     * Returns NULL if {@link setMaxResults} was not applied to this query.
-     *
-     * @return integer|null Maximum number of results.
+     * @return int|null
      */
     public function getMaxResults();
 
     /**
-     * Executes the query and returns an IterableResult that can be used to incrementally
-     * iterated over the result.
-     *
      * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
      * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
-     * @param ArrayCollection|Parameter[]|null $parameters    The query parameters.
-     * @param string|int                 $hydrationMode The hydration mode to use.
-     *
-     * @return \Doctrine\ORM\Internal\Hydration\IterableResult
+     * @param ArrayCollection|Parameter[]|null $parameters
+     * @param string|int                       $hydrationMode
+     * @return IterableResult
      */
     public function iterate($parameters = null, $hydrationMode = Query::HYDRATE_OBJECT);
 
     /**
-     * {@inheritdoc}
+     * @param string $name
+     * @param mixed  $value
+     * @return static
      */
     public function setHint($name, $value);
 
     /**
-     * {@inheritdoc}
+     * @param string|int $hydrationMode
+     * @return static
      */
     public function setHydrationMode($hydrationMode);
 
     /**
-     * Set the lock mode for this Query.
-     *
-     * @see \Doctrine\DBAL\LockMode
-     *
      * @param int $lockMode
-     *
      * @return AbstractQuery
-     *
      * @throws TransactionRequiredException
      */
     public function setLockMode($lockMode);
 
     /**
-     * Get the current lock mode for this query.
-     *
-     * @return int|null The current lock mode of this query or NULL if no specific lock mode is set.
+     * @return int|null
      */
     public function getLockMode();
 
 
     /**
-     * Cleanup Query resource when clone is called.
-     *
      * @return void
      */
     public function __clone();
+
+
+    /**
+     * @param bool $cacheable
+     * @return static
+     */
+    public function setCacheable($cacheable);
+    
+    /**
+     * @return bool
+     */
+    public function isCacheable();
+
+    /**
+     * @param string $cacheRegion
+     * @return static
+     */
+    public function setCacheRegion($cacheRegion);
+
+    /**
+     * @return string|null
+     */
+    public function getCacheRegion();
+    
+    /**
+     * @return int
+     */
+    public function getLifetime();
+
+    /**
+     * @param int $lifetime
+     * @return AbstractQuery
+     */
+    public function setLifetime($lifetime);
+
+    /**
+     * @return int
+     */
+    public function getCacheMode();
+
+    /**
+     * @param int $cacheMode
+     * @return AbstractQuery
+     */
+    public function setCacheMode($cacheMode);
+
+    /**
+     * @return EntityManager
+     */
+    public function getEntityManager();
+    
+    /**
+     * @phpstan-return ArrayCollection<array-key, Parameter>
+     * @psalm-return ArrayCollection<array-key, Parameter>
+     * @return ArrayCollection
+     */
+    public function getParameters();
+
+    /**
+     * @param mixed $key
+     * @return Query\Parameter|null
+     */
+    public function getParameter($key);
+
+    /**
+     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
+     * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
+     * @param ArrayCollection|mixed[] $parameters
+     * @return static
+     */
+    public function setParameters($parameters);
+    
+    /**
+     * @param string|int  $key
+     * @param mixed       $value
+     * @param string|null $type
+     * @return static
+     */
+    public function setParameter($key, $value, $type = null);
+
+    /**
+     * @param mixed $value
+     * @return mixed[]|string
+     * @throws ORMInvalidArgumentException
+     */
+    public function processParameterValue($value);
+
+    /**
+     * @param ResultSetMapping $rsm
+     * @return static
+     */
+    public function setResultSetMapping(ResultSetMapping $rsm);
+
+    /**
+     * @param QueryCacheProfile $profile
+     * @return static
+     */
+    public function setHydrationCacheProfile(QueryCacheProfile $profile = null);
+
+    /**
+     * @return QueryCacheProfile
+     */
+    public function getHydrationCacheProfile();
+
+    /**
+     * @param QueryCacheProfile $profile
+     * @return static
+     */
+    public function setResultCacheProfile(QueryCacheProfile $profile = null);
+
+    /**
+     * @param Cache|null $resultCacheDriver
+     * @return static
+     * @throws ORMException
+     */
+    public function setResultCacheDriver($resultCacheDriver = null);
+    
+    /**
+     * @return Cache
+     */
+    public function getResultCacheDriver();
+
+    /**
+     * @param bool   $useCache
+     * @param int    $lifetime
+     * @param string $resultCacheId
+     * @return static
+     */
+    public function useResultCache($useCache, $lifetime = null, $resultCacheId = null);
+
+    /**
+     * @param int|null    $lifetime
+     * @param string|null $resultCacheId
+     * @return AbstractQuery
+     */
+    public function enableResultCache(?int $lifetime = null, ?string $resultCacheId = null): AbstractQuery;
+    
+    /**
+     * @return AbstractQuery
+     */
+    public function disableResultCache() : AbstractQuery;
+    
+    /**
+     * @param int $lifetime
+     * @return static
+     */
+    public function setResultCacheLifetime($lifetime);
+
+    /**
+     * @return int
+     */
+    public function getResultCacheLifetime();
+
+    /**
+     * @param bool $expire
+     * @return static
+     */
+    public function expireResultCache($expire = true);
+
+    /**
+     * @return bool
+     */
+    public function getExpireResultCache();
+
+    /**
+     * @return QueryCacheProfile
+     */
+    public function getQueryCacheProfile();
+
+    /**
+     * @param string $class
+     * @param string $assocName
+     * @param int    $fetchMode
+     * @return static
+     */
+    public function setFetchMode($class, $assocName, $fetchMode);
+
+    /**
+     * @return string|int
+     */
+    public function getHydrationMode();
+
+    /**
+     * @param string|int $hydrationMode
+     * @return mixed
+     */
+    public function getResult($hydrationMode = AbstractQuery::HYDRATE_OBJECT);
+
+    /**
+     * @return mixed[]
+     */
+    public function getArrayResult();
+
+    /**
+     * @phpstan-return scalar
+     * @psalm-return scalar
+     * @return mixed
+     */
+    public function getScalarResult();
+
+    /**
+     * @param string|int $hydrationMode
+     * @return mixed
+     * @throws NonUniqueResultException
+     */
+    public function getOneOrNullResult($hydrationMode = null);
+         
+
+    /**
+     * @param string|int $hydrationMode
+     * @return mixed
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function getSingleResult($hydrationMode = null);
+
+
+    /**
+     * @return mixed
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function getSingleScalarResult();
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function getHint($name);
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function hasHint($name);
+
+    /**
+     * @return mixed[]
+     */
+    public function getHints();
+
+    /**
+     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
+     * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
+     * @param ArrayCollection|Parameter[]|null $parameters
+     * @param string|int|null                  $hydrationMode
+     * @return mixed
+     */
+    public function execute($parameters = null, $hydrationMode = null);
+    
+    /**
+     * @param string $id
+     * @return static
+     */
+    public function setResultCacheId($id);
+
+    /**
+     * @return string
+     */
+    public function getResultCacheId();
 }
