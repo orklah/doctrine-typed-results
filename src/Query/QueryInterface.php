@@ -40,7 +40,7 @@ interface QueryInterface
      * @return AbstractQuery
      */
     public function setQueryCacheDriver($queryCache);
-    
+
     /**
      * @param bool $bool
      * @return AbstractQuery
@@ -62,7 +62,7 @@ interface QueryInterface
      * @return int
      */
     public function getQueryCacheLifetime();
-    
+
     /**
      * @param bool $expire
      * @return AbstractQuery
@@ -73,7 +73,7 @@ interface QueryInterface
      * @return bool
      */
     public function getExpireQueryCache();
-    
+
     public function free();
 
     /**
@@ -166,7 +166,7 @@ interface QueryInterface
      * @return static
      */
     public function setCacheable($cacheable);
-    
+
     /**
      * @return bool
      */
@@ -182,7 +182,7 @@ interface QueryInterface
      * @return string|null
      */
     public function getCacheRegion();
-    
+
     /**
      * @return int
      */
@@ -209,7 +209,7 @@ interface QueryInterface
      * @return EntityManager
      */
     public function getEntityManager();
-    
+
     /**
      * @phpstan-return ArrayCollection<array-key, Parameter>
      * @psalm-return ArrayCollection<array-key, Parameter>
@@ -230,7 +230,7 @@ interface QueryInterface
      * @return static
      */
     public function setParameters($parameters);
-    
+
     /**
      * @param string|int  $key
      * @param mixed       $value
@@ -275,7 +275,7 @@ interface QueryInterface
      * @throws ORMException
      */
     public function setResultCacheDriver($resultCacheDriver = null);
-    
+
     /**
      * @return Cache
      */
@@ -295,12 +295,12 @@ interface QueryInterface
      * @return AbstractQuery
      */
     public function enableResultCache(?int $lifetime = null, ?string $resultCacheId = null): AbstractQuery;
-    
+
     /**
      * @return AbstractQuery
      */
-    public function disableResultCache() : AbstractQuery;
-    
+    public function disableResultCache(): AbstractQuery;
+
     /**
      * @param int $lifetime
      * @return static
@@ -365,7 +365,6 @@ interface QueryInterface
      * @throws NonUniqueResultException
      */
     public function getOneOrNullResult($hydrationMode = null);
-         
 
     /**
      * @param string|int $hydrationMode
@@ -374,7 +373,6 @@ interface QueryInterface
      * @throws NoResultException
      */
     public function getSingleResult($hydrationMode = null);
-
 
     /**
      * @return mixed
@@ -408,7 +406,7 @@ interface QueryInterface
      * @return mixed
      */
     public function execute($parameters = null, $hydrationMode = null);
-    
+
     /**
      * @param string $id
      * @return static
