@@ -44,7 +44,8 @@ abstract class TypedQuery extends AbstractQuery implements QueryInterface
      * @param mixed $type
      * @return string
      */
-    protected function getDisplayableType($type): string{
+    protected function getDisplayableType($type): string
+    {
         if (is_scalar($type)) {
             return $type;
         }
@@ -53,8 +54,8 @@ abstract class TypedQuery extends AbstractQuery implements QueryInterface
             return gettype($type);
         }
 
-        if(is_array($type)) {
-            if(count($type) === 0){
+        if (is_array($type)) {
+            if (count($type) === 0) {
                 return 'empty-array';
             }
 
