@@ -43,9 +43,9 @@ class EntitiesQuery extends TypedQuery
      * @return object[]
      * @throws AssertionFailedException
      */
-    public function getResult($hydrationMode = self::HYDRATE_ARRAY)
+    public function getResult($hydrationMode = self::HYDRATE_OBJECT)
     {
-        Assertion::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
+        Assertion::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_OBJECT . ' got "' . $hydrationMode . '"');
         $result = $this->query->getResult($hydrationMode);
         Assertion::allIsInstanceOf($result, $this->type, 'Expected result to be an array of classes instance of ' . $this->type . ' got ' . $this->getDisplayableType($result) . ' instead');
 
