@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
-use Assert\Assertion;
-use Assert\AssertionFailedException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
+use Webmozart\Assert\Assert;
 
 use function gettype;
 use function is_string;
@@ -51,15 +50,14 @@ class EntityQuery extends TypedQuery
      * @param string|int|null $hydrationMode
      * @psalm-return Entity
      * @return object
-     * @throws AssertionFailedException
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
     public function getSingleResult($hydrationMode = self::HYDRATE_OBJECT)
     {
-        Assertion::same($hydrationMode, self::HYDRATE_OBJECT, 'Expected ' . self::HYDRATE_OBJECT . ' got "' . $hydrationMode . '"');
+        Assert::same($hydrationMode, self::HYDRATE_OBJECT, 'Expected ' . self::HYDRATE_OBJECT . ' got "' . $hydrationMode . '"');
         $result = $this->query->getSingleResult($hydrationMode);
-        Assertion::isInstanceOf($result, $this->type, 'Expected result to be instance of ' . $this->type . ' got ' . gettype($result) . '('. (is_string($result) ? $result : '') . ')' . ' instead');
+        Assert::isInstanceOf($result, $this->type, 'Expected result to be instance of ' . $this->type . ' got ' . gettype($result) . '('. (is_string($result) ? $result : '') . ')' . ' instead');
 
         return $result;
     }

@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
-use Assert\Assertion;
-use Assert\AssertionFailedException;
 use Doctrine\ORM\Query;
-
-use function gettype;
+use Webmozart\Assert\Assert;
 
 /**
  * @template Entity
@@ -41,13 +38,12 @@ class EntitiesQuery extends TypedQuery
      * @psalm-return list<Entity>
      * @param int|string $hydrationMode
      * @return object[]
-     * @throws AssertionFailedException
      */
     public function getResult($hydrationMode = self::HYDRATE_OBJECT)
     {
-        Assertion::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_OBJECT . ' got "' . $hydrationMode . '"');
+        Assert::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_OBJECT . ' got "' . $hydrationMode . '"');
         $result = $this->query->getResult($hydrationMode);
-        Assertion::allIsInstanceOf($result, $this->type, 'Expected result to be an array of classes instance of ' . $this->type . ' got ' . $this->getDisplayableType($result) . ' instead');
+        Assert::allIsInstanceOf($result, $this->type, 'Expected result to be an array of classes instance of ' . $this->type . ' got ' . $this->getDisplayableType($result) . ' instead');
 
         return $result;
     }
@@ -72,7 +68,6 @@ class EntitiesQuery extends TypedQuery
      * @phpstan-return list<Entity>
      * @psalm-return list<Entity>
      * @return object[]
-     * @throws AssertionFailedException
      */
     public function getEntitiesResult()
     {

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\EntityManager;
 
-use Assert\Assertion;
-use Assert\AssertionFailedException;
 use DoctrineTypedResults\Query\BoolQuery;
 use DoctrineTypedResults\Query\BoolsQuery;
 use DoctrineTypedResults\Query\EntitiesQuery;
@@ -31,6 +29,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use DoctrineTypedResults\QueryBuilder\StringsQueryBuilder;
 use InvalidArgumentException;
+use Webmozart\Assert\Assert;
 
 class TypedEntityManager
 {
@@ -226,11 +225,10 @@ class TypedEntityManager
      *
      * @param string $type
      * @return EntitiesQueryBuilder
-     * @throws AssertionFailedException
      */
     public function createEntitiesQueryBuilder(string $type)
     {
-        Assertion::classExists($type, 'Expecting existing class, got "' . $type . '"');
+        Assert::classExists($type, 'Expecting existing class, got "' . $type . '"');
 
         return new EntitiesQueryBuilder($this->em, $type);
     }
@@ -243,11 +241,10 @@ class TypedEntityManager
      * @param string $type
      * @param string $dql
      * @return EntityQuery
-     * @throws AssertionFailedException
      */
     public function createEntityQuery(string $type, string $dql)
     {
-        Assertion::classExists($type, 'Expecting existing class, got "' . $type . '"');
+        Assert::classExists($type, 'Expecting existing class, got "' . $type . '"');
         $query = $this->em->createQuery($dql);
 
         return new EntityQuery($query, $type);
@@ -261,11 +258,10 @@ class TypedEntityManager
      * @param string $type
      * @param string $dql
      * @return EntitiesQuery
-     * @throws AssertionFailedException
      */
     public function createEntitiesQuery(string $type, string $dql)
     {
-        Assertion::classExists($type, 'Expecting existing class, got "' . $type . '"');
+        Assert::classExists($type, 'Expecting existing class, got "' . $type . '"');
         $query = $this->em->createQuery($dql);
 
         return new EntitiesQuery($query, $type);

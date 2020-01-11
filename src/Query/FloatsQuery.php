@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
-use Assert\Assertion;
-use Assert\AssertionFailedException;
+use Webmozart\Assert\Assert;
 
 class FloatsQuery extends TypedQuery
 {
@@ -14,13 +13,12 @@ class FloatsQuery extends TypedQuery
     /**
      * @param int|string $hydrationMode
      * @return float[]
-     * @throws AssertionFailedException
      */
     public function getResult($hydrationMode = self::HYDRATE_ARRAY)
     {
-        Assertion::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
+        Assert::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
         $result =  parent::getResult($hydrationMode);
-        Assertion::allNumeric($result, 'Expected a list of Float');
+        Assert::allNumeric($result, 'Expected a list of Float');
 
         return array_map('\floatval', $result);// The cast is needed because Doctrine may return numeric values
     }
@@ -35,7 +33,6 @@ class FloatsQuery extends TypedQuery
 
     /**
      * @return float[]
-     * @throws AssertionFailedException
      */
     public function getFloatsResult()
     {

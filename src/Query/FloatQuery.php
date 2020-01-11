@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
-use Assert\Assertion;
-use Assert\AssertionFailedException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Webmozart\Assert\Assert;
 
 use function gettype;
 
@@ -17,21 +16,19 @@ class FloatQuery extends TypedQuery
 
     /**
      * @return float
-     * @throws AssertionFailedException
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        Assertion::numeric($result, 'Expected float, got "'. gettype($result) . '"');
+        Assert::numeric($result, 'Expected float, got "'. gettype($result) . '"');
 
         return (float)$result;// The cast is needed because Doctrine may return numeric values
     }
 
     /**
      * @return float
-     * @throws AssertionFailedException
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
@@ -43,7 +40,6 @@ class FloatQuery extends TypedQuery
     /**
      * @param string|int|null $hydrationMode
      * @return float
-     * @throws AssertionFailedException
      * @throws NoResultException
      * @throws NonUniqueResultException
      */

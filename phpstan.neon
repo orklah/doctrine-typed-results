@@ -6,8 +6,11 @@ parameters:
 		# no control over doctrine classes + compatibilty with old versions
 		- '#.+has no return typehint specified.#'
 		- '#.+with no typehint specified.#'
-		
+
 		# func_get_args
 		- '#PHPDoc tag @param references unknown parameter: \$where#'
-		
+
+		# Unsupported notation "of something" by phpstan
+		- '#Unable to resolve the template type ExpectedType in call to method static method Webmozart\\Assert\\Assert::isInstanceOf\(\)#'
+
 	level: max

@@ -15,10 +15,13 @@
 
     <issueHandlers>
         <!-- Don't have control over Doctrine Classes + Maintain old PHP version as possible? -->
-        <MissingReturnType errorLevel="suppress"/>
-        <MissingParamType errorLevel="suppress"/>
+        <MissingReturnType errorLevel="info"/>
+        <MissingParamType errorLevel="info"/>
 
         <!-- Don't need to use internal details of AbstractQuery -->
         <PropertyNotSetInConstructor errorLevel="suppress" />
+
+        <!-- DocBlocks are part of documentation. It doesn't mean users won't pass wrong types -->
+        <RedundantConditionGivenDocblockType errorLevel="info" />
     </issueHandlers>
 <plugins><pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/></plugins></psalm>

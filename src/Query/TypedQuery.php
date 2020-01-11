@@ -23,10 +23,7 @@ abstract class TypedQuery extends AbstractQuery implements QueryInterface
         $this->query = $query;
     }
 
-    /**
-     * @return Query
-     */
-    public function getQuery()
+    public function getQuery(): Query
     {
         return $this->query;
     }
@@ -34,20 +31,20 @@ abstract class TypedQuery extends AbstractQuery implements QueryInterface
     /**
      * Alias of getQuery
      */
-    public function get()
+    public function get(): Query
     {
         return $this->getQuery();
     }
 
     /**
-     * @psalm-param object|array|scalar $type
+     * @psalm-param object|array|scalar|mixed $type
      * @param mixed $type
      * @return string
      */
     protected function getDisplayableType($type): string
     {
         if (is_scalar($type)) {
-            return $type;
+            return (string)$type;
         }
 
         if (is_object($type)) {

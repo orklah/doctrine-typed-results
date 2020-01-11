@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
-use Assert\Assertion;
-use Assert\AssertionFailedException;
+use Webmozart\Assert\Assert;
 
 class StringsQuery extends TypedQuery
 {
@@ -14,13 +13,12 @@ class StringsQuery extends TypedQuery
     /**
      * @param int|string $hydrationMode
      * @return string[]
-     * @throws AssertionFailedException
      */
     public function getResult($hydrationMode = self::HYDRATE_ARRAY)
     {
-        Assertion::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
+        Assert::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
         $result =  parent::getResult($hydrationMode);
-        Assertion::allIntegerish($result, 'Expected a list of String');
+        Assert::allIntegerish($result, 'Expected a list of String');
 
         return $result;
     }
@@ -35,7 +33,6 @@ class StringsQuery extends TypedQuery
 
     /**
      * @return string[]
-     * @throws AssertionFailedException
      */
     public function getStringsResult()
     {
