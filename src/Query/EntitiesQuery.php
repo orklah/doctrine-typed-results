@@ -47,7 +47,7 @@ class EntitiesQuery extends TypedQuery
     {
         Assertion::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
         $result = $this->query->getResult($hydrationMode);
-        Assertion::allIsInstanceOf($result, $this->type, 'Expected result to be an array of classes instance of ' . $this->type . ' got ' . gettype($result) . '('. (is_scalar($result) ? $result : '') . ')' . ' instead');
+        Assertion::allIsInstanceOf($result, $this->type, 'Expected result to be an array of classes instance of ' . $this->type . ' got ' . $this->getDisplayableType($result) . ' instead');
 
         return $result;
     }

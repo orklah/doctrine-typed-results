@@ -38,4 +38,29 @@ abstract class TypedQuery extends AbstractQuery implements QueryInterface
     {
         return $this->getQuery();
     }
+
+    /**
+     * @psalm-param object|array|scalar $type
+     * @param mixed $type
+     * @return string
+     */
+    protected function getDisplayableType($type): string{
+        if (is_scalar($type)) {
+            return $type;
+        }
+
+        if (is_object($type)) {
+            return gettype($type);
+        }
+
+        if(is_array($type)) {
+            if(count($type) === 0){
+                return 'empty-array';
+            }
+
+            return 'array('.$this->getDisplayableType(array_shift($type));
+        }
+
+        return 'unknown type';
+    }
 }
