@@ -58,7 +58,7 @@ abstract class TypedQuery extends AbstractQuery implements QueryInterface
                 return 'empty-array';
             }
 
-            return 'array('.$this->getDisplayableType(array_shift($type));
+            return 'array('.$this->getDisplayableType(array_shift($type)).')';
         }
 
         return 'unknown type';
