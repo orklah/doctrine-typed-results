@@ -2,12 +2,14 @@
 <psalm
     totallyTyped="false"
     resolveFromConfigFile="true"
+    strictBinaryOperands="false"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
     <projectFiles>
         <directory name="src"/>
+        <directory name="tests"/>
         <ignoreFiles>
             <directory name="vendor"/>
         </ignoreFiles>
@@ -18,10 +20,35 @@
         <MissingReturnType errorLevel="info"/>
         <MissingParamType errorLevel="info"/>
 
-        <!-- Don't need to use internal details of AbstractQuery -->
-        <PropertyNotSetInConstructor errorLevel="suppress" />
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <!-- Don't need to use internal details of AbstractQuery -->
+                <referencedProperty name="Doctrine\ORM\AbstractQuery::$_resultSetMapping"/>
+                <referencedProperty name="Doctrine\ORM\AbstractQuery::$_queryCacheProfile"/>
+                <referencedProperty name="Doctrine\ORM\AbstractQuery::$_hydrationCacheProfile"/>
+                <!-- Weird behaviour with phpunit -->
+                <referencedProperty name="PHPUnit\Framework\TestCase::$backupGlobals"/>
+                <referencedProperty name="PHPUnit\Framework\TestCase::$backupStaticAttributes"/>
+                <referencedProperty name="PHPUnit\Framework\TestCase::$runTestInSeparateProcess"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
 
-        <!-- DocBlocks are part of documentation. It doesn't mean users won't pass wrong types -->
-        <RedundantConditionGivenDocblockType errorLevel="info" />
+        <RedundantConditionGivenDocblockType>
+            <errorLevel type="suppress">
+                <!-- DocBlocks are part of documentation. It doesn't mean users won't pass wrong types -->
+                <file name="src\EntityManager\TypedEntityManager.php"/>
+            </errorLevel>
+        </RedundantConditionGivenDocblockType>
+
+        <!-- https://github.com/sebastianbergmann/phpunit/issues/3742 -->
+        <InternalMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn"/>
+                <referencedMethod name="PHPUnit\Framework\TestCase::__construct"/>
+            </errorLevel>
+        </InternalMethod>
     </issueHandlers>
-<plugins><pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/></plugins></psalm>
+    <plugins>
+        <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
+    </plugins>
+</psalm>
