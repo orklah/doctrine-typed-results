@@ -30,7 +30,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class NamespacesTest extends TestCase
 {
-    public function testClassNamespace()
+    public function testClassNamespace(): void
     {
         self::assertTrue(class_exists(EntityManager::class), EntityManager::class . ' could not be autoloaded');
         self::assertTrue(class_exists(QueryBuilder::class), QueryBuilder::class . ' could not be autoloaded');
@@ -50,7 +50,7 @@ final class NamespacesTest extends TestCase
         self::assertTrue(class_exists(QueryException::class), QueryException::class . ' could not be autoloaded');
     }
 
-    public function testInterfaceNamespace()
+    public function testInterfaceNamespace(): void
     {
         self::assertTrue(interface_exists(ObjectRepository::class), ObjectRepository::class . ' could not be autoloaded');
         self::assertTrue(interface_exists(EntityManagerInterface::class), EntityManagerInterface::class . ' could not be autoloaded');

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DoctrineCompatibility;
 
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use DoctrineTypedResults\Query\QueryInterface;
@@ -23,7 +22,7 @@ final class ContractsTest extends TestCase
     /**
      * @throws ReflectionException
      */
-    public function testQueryContract()
+    public function testQueryContract(): void
     {
         $refl = new ReflectionClass(Query::class);
         foreach ($refl->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
@@ -36,8 +35,8 @@ final class ContractsTest extends TestCase
         }
     }
 
-    
-    public function testQueryBuilderContract()
+
+    public function testQueryBuilderContract(): void
     {
         $refl = new ReflectionClass(QueryBuilder::class);
         foreach ($refl->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {

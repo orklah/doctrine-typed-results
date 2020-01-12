@@ -33,17 +33,19 @@ use stdClass;
 
 /**
  * This class will create an instance of each class to ensure every contract is respected
+ * and no signature issue will happen
  */
 final class InstantiationTest extends TestCase
 {
 
-    public function testInstantiation(){
+    public function testInstantiation(): void
+    {
         $em = $this->createMock(EntityManager::class);
         $config = $this->createMock(Configuration::class);
         $em->method('getConfiguration')->willReturn($config);
         $query = new Query($em);
-        
-        
+
+
         self::assertIsObject(new BoolQuery($query));
         self::assertIsObject(new BoolsQuery($query));
         self::assertIsObject(new EntitiesQuery($query, stdClass::class));
@@ -54,7 +56,7 @@ final class InstantiationTest extends TestCase
         self::assertIsObject(new IntsQuery($query));
         self::assertIsObject(new StringQuery($query));
         self::assertIsObject(new StringsQuery($query));
-        
+
         self::assertIsObject(new BoolQueryBuilder($em));
         self::assertIsObject(new BoolsQueryBuilder($em));
         self::assertIsObject(new EntitiesQueryBuilder($em, stdClass::class));
@@ -67,6 +69,5 @@ final class InstantiationTest extends TestCase
         self::assertIsObject(new StringsQueryBuilder($em));
 
         self::assertIsObject(new TypedPaginator(new StringQuery($query)));
-
     }
 }
