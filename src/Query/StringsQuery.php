@@ -16,9 +16,9 @@ class StringsQuery extends TypedQuery
      */
     public function getResult($hydrationMode = self::HYDRATE_ARRAY)
     {
-        Assert::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
+        Assert::same($hydrationMode, self::HYDRATE_ARRAY);
         $result =  parent::getResult($hydrationMode);
-        Assert::allIntegerish($result, 'Expected a list of String');
+        Assert::allIntegerish($result);
 
         return $result;
     }

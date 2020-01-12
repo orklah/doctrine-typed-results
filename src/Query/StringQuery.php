@@ -22,7 +22,7 @@ class StringQuery extends TypedQuery
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        Assert::string($result, 'Expected string, got "'. gettype($result) . '"');
+        Assert::string($result);
 
         return $result;
     }

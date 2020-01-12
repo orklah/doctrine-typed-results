@@ -55,9 +55,9 @@ class EntityQuery extends TypedQuery
      */
     public function getSingleResult($hydrationMode = self::HYDRATE_OBJECT)
     {
-        Assert::same($hydrationMode, self::HYDRATE_OBJECT, 'Expected ' . self::HYDRATE_OBJECT . ' got "' . $hydrationMode . '"');
+        Assert::same($hydrationMode, self::HYDRATE_OBJECT);
         $result = $this->query->getSingleResult($hydrationMode);
-        Assert::isInstanceOf($result, $this->type, 'Expected result to be instance of ' . $this->type . ' got ' . gettype($result) . '('. (is_string($result) ? $result : '') . ')' . ' instead');
+        Assert::isInstanceOf($result, $this->type);
 
         return $result;
     }

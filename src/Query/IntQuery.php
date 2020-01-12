@@ -22,7 +22,7 @@ class IntQuery extends TypedQuery
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        Assert::integerish($result, 'Expected int, got "'. gettype($result) . '"');
+        Assert::integerish($result);
 
         return (int)$result;// The cast is needed because Doctrine may return numeric values
     }

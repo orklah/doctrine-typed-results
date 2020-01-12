@@ -22,7 +22,7 @@ class FloatQuery extends TypedQuery
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        Assert::numeric($result, 'Expected float, got "'. gettype($result) . '"');
+        Assert::numeric($result);
 
         return (float)$result;// The cast is needed because Doctrine may return numeric values
     }

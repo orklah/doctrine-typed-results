@@ -22,7 +22,7 @@ class BoolQuery extends TypedQuery
     public function getSingleScalarResult()
     {
         $result = $this->query->getSingleScalarResult();
-        Assert::boolean($result, 'Expected bool, got "'. gettype($result) . '"');
+        Assert::boolean($result);
 
         return $result;
     }

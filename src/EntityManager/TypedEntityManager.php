@@ -228,7 +228,7 @@ class TypedEntityManager
      */
     public function createEntitiesQueryBuilder(string $type)
     {
-        Assert::classExists($type, "Expecting existing class, got '{$type}'");
+        Assert::classExists($type);
 
         return new EntitiesQueryBuilder($this->em, $type);
     }
@@ -244,7 +244,7 @@ class TypedEntityManager
      */
     public function createEntityQuery(string $type, string $dql)
     {
-        Assert::classExists($type, "Expecting existing class, got '{$type}'");
+        Assert::classExists($type);
         $query = $this->em->createQuery($dql);
 
         return new EntityQuery($query, $type);
@@ -261,7 +261,7 @@ class TypedEntityManager
      */
     public function createEntitiesQuery(string $type, string $dql)
     {
-        Assert::classExists($type, "Expecting existing class, got '{$type}'");
+        Assert::classExists($type);
         $query = $this->em->createQuery($dql);
 
         return new EntitiesQuery($query, $type);

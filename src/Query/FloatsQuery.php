@@ -16,9 +16,9 @@ class FloatsQuery extends TypedQuery
      */
     public function getResult($hydrationMode = self::HYDRATE_ARRAY)
     {
-        Assert::same($hydrationMode, self::HYDRATE_ARRAY, 'Expected ' . self::HYDRATE_ARRAY . ' got "' . $hydrationMode . '"');
+        Assert::same($hydrationMode, self::HYDRATE_ARRAY);
         $result =  parent::getResult($hydrationMode);
-        Assert::allNumeric($result, 'Expected a list of Float');
+        Assert::allNumeric($result);
 
         return array_map('\floatval', $result);// The cast is needed because Doctrine may return numeric values
     }
