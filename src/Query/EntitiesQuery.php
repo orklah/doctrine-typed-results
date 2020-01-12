@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DoctrineTypedResults\Query;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query;
 use Webmozart\Assert\Assert;
 
@@ -23,9 +24,10 @@ class EntitiesQuery extends TypedQuery
     /**
      * @param string $type
      * @psalm-param class-string<Entity> $type
-     * @param Query $query
+     * @param Query $query For testability reasons, we have to accept AbstractQuery
+     *                     But the real type has to be a Query
      */
-    public function __construct(Query $query, $type)
+    public function __construct(AbstractQuery $query, $type)
     {
         parent::__construct($query);
         $this->type = $type;
