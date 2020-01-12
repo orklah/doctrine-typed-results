@@ -238,7 +238,6 @@ interface QueryBuilderInterface
      *             new Parameter('user_id2', 2)
      *        )));
      * </code>
-     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
      * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
      * @param ArrayCollection|Parameter[] $parameters The query parameters to set.
      *
@@ -249,7 +248,6 @@ interface QueryBuilderInterface
     /**
      * Gets all defined query parameters for the query being constructed.
      *
-     * @phpstan-return ArrayCollection<array-key, Parameter>
      * @psalm-return ArrayCollection<array-key, Parameter>
      * @return ArrayCollection The currently defined query parameters.
      */

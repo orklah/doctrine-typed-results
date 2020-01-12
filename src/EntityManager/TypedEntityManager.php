@@ -298,11 +298,9 @@ class TypedEntityManager
      * @template Entity
      *
      * @psalm-param class-string<Entity> $entityName
-     * @phpstan-param class-string<Entity> $entityName
      *
      * @return ObjectRepository
      * @psalm-return ObjectRepository<Entity>
-     * @phpstan-return ObjectRepository<Entity>
      */
     public function getRepository(string $entityName)
     {
@@ -317,8 +315,7 @@ class TypedEntityManager
      * @param mixed $id
      *
      * @return object|null
-     * @psalm-return Entity|null
-     * @phpstan-return Entity|null
+     * @psalm-return ?Entity
      */
     public function find(string $entityName, $id, ?int $lockMode = null, ?int $lockVersion = null)
     {
@@ -333,8 +330,7 @@ class TypedEntityManager
      * @param mixed $id
      *
      * @return object|null
-     * @psalm-return Entity|null
-     * @phpstan-return Entity|null
+     * @psalm-return ?Entity
      */
     public function getReference(string $entityName, $id)
     {

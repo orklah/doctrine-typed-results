@@ -18,16 +18,14 @@ class TypedPaginator
 {
     /**
      * @psalm-var Paginator<Entity>
-     * @phpstan-var Paginator<Entity>
      * @var Paginator
      */
     private $paginator;
 
     /**
-     * @psalm-param EntitiesQuery<Entity>|EntitiesQueryBuilder<Entity>|TypedQueryBuilder|TypedQuery   $query
-     * @phpstan-param EntitiesQuery<Entity>|EntitiesQueryBuilder<Entity>|TypedQueryBuilder|TypedQuery $query
-     * @param EntitiesQuery|EntitiesQueryBuilder|TypedQueryBuilder|TypedQuery                         $query
-     * @param bool                                                                                    $fetchJoinCollection
+     * @psalm-param EntitiesQuery<Entity>|EntitiesQueryBuilder<Entity>|TypedQueryBuilder|TypedQuery $query
+     * @param EntitiesQuery|EntitiesQueryBuilder|TypedQueryBuilder|TypedQuery                       $query
+     * @param bool                                                                                  $fetchJoinCollection
      */
     public function __construct($query, $fetchJoinCollection = true)
     {
@@ -36,7 +34,6 @@ class TypedPaginator
 
     /**
      * @psalm-return Paginator<Entity>
-     * @phpstan-return Paginator<Entity>
      * @return Paginator
      */
     public function get()

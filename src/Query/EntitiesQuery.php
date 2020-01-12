@@ -16,7 +16,6 @@ class EntitiesQuery extends TypedQuery
 
     /**
      * @psalm-var class-string<Entity>
-     * @phpstan-var class-string<Entity>
      * @var string
      */
     private $type;
@@ -24,7 +23,6 @@ class EntitiesQuery extends TypedQuery
     /**
      * @param string $type
      * @psalm-param class-string<Entity> $type
-     * @phpstan-param class-string<Entity> $type
      * @param Query $query
      */
     public function __construct(Query $query, $type)
@@ -34,7 +32,6 @@ class EntitiesQuery extends TypedQuery
     }
 
     /**
-     * @phpstan-return list<Entity>
      * @psalm-return list<Entity>
      * @param int|string $hydrationMode
      * @return object[]
@@ -65,7 +62,6 @@ class EntitiesQuery extends TypedQuery
     }
 
     /**
-     * @phpstan-return list<Entity>
      * @psalm-return list<Entity>
      * @return object[]
      */

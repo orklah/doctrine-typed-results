@@ -21,7 +21,6 @@ class EntityQuery extends TypedQuery
 
     /**
      * @psalm-var class-string<Entity>
-     * @phpstan-var class-string<Entity>
      * @var string
      */
     private $type;
@@ -29,7 +28,6 @@ class EntityQuery extends TypedQuery
     /**
      * @param string $type
      * @psalm-param class-string<Entity> $type
-     * @phpstan-param class-string<Entity> $type
      * @param Query $query
      */
     public function __construct(Query $query, $type)

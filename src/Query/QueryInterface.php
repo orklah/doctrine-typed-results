@@ -121,7 +121,6 @@ interface QueryInterface
     public function getMaxResults();
 
     /**
-     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
      * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
      * @param ArrayCollection|Parameter[]|null $parameters
      * @param string|int                       $hydrationMode
@@ -211,7 +210,6 @@ interface QueryInterface
     public function getEntityManager();
 
     /**
-     * @phpstan-return ArrayCollection<array-key, Parameter>
      * @psalm-return ArrayCollection<array-key, Parameter>
      * @return ArrayCollection
      */
@@ -224,7 +222,6 @@ interface QueryInterface
     public function getParameter($key);
 
     /**
-     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
      * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
      * @param ArrayCollection|mixed[] $parameters
      * @return static
@@ -353,7 +350,6 @@ interface QueryInterface
     public function getArrayResult();
 
     /**
-     * @phpstan-return scalar
      * @psalm-return scalar
      * @return mixed
      */
@@ -399,7 +395,6 @@ interface QueryInterface
     public function getHints();
 
     /**
-     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
      * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[]|null $parameters
      * @param ArrayCollection|Parameter[]|null $parameters
      * @param string|int|null                  $hydrationMode

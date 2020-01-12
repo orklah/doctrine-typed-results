@@ -15,14 +15,12 @@ class EntitiesQueryBuilder extends TypedQueryBuilder
     use TypedQueryBuilderTrait;
 
     /**
-     * @phpstan-var class-string<Entity>
      * @psalm-var class-string<Entity>
      * @var string
      */
     protected $type;
 
     /**
-     * @phpstan-param class-string<Entity> $type
      * @psalm-param class-string<Entity> $type
      * @param EntityManagerInterface $em
      * @param string $type

@@ -297,7 +297,6 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @phpstan-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
      * @psalm-param ArrayCollection<array-key, Parameter>|Parameter[] $parameters
      * @param ArrayCollection|Parameter[] $parameters
      * @return static
@@ -309,7 +308,6 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @phpstan-return ArrayCollection<array-key, Parameter>
      * @psalm-return ArrayCollection<array-key, Parameter>
      * @return ArrayCollection
      */
