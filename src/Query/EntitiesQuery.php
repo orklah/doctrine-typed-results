@@ -40,7 +40,7 @@ class EntitiesQuery extends TypedQuery
      */
     public function getResult($hydrationMode = self::HYDRATE_OBJECT)
     {
-        Assert::same($hydrationMode, self::HYDRATE_ARRAY);
+        Assert::same($hydrationMode, self::HYDRATE_OBJECT);
         $result = $this->query->getResult($hydrationMode);
         Assert::allIsInstanceOf($result, $this->type);
 
