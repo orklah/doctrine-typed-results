@@ -23,28 +23,28 @@
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
                 <!-- Don't need to use internal details of AbstractQuery -->
-                <referencedProperty name="Doctrine\ORM\AbstractQuery::$_resultSetMapping"/>
-                <referencedProperty name="Doctrine\ORM\AbstractQuery::$_queryCacheProfile"/>
-                <referencedProperty name="Doctrine\ORM\AbstractQuery::$_hydrationCacheProfile"/>
+                <referencedProperty name="Doctrine/ORM/AbstractQuery::$_resultSetMapping"/>
+                <referencedProperty name="Doctrine/ORM/AbstractQuery::$_queryCacheProfile"/>
+                <referencedProperty name="Doctrine/ORM/AbstractQuery::$_hydrationCacheProfile"/>
                 <!-- Weird behaviour with phpunit -->
-                <referencedProperty name="PHPUnit\Framework\TestCase::$backupGlobals"/>
-                <referencedProperty name="PHPUnit\Framework\TestCase::$backupStaticAttributes"/>
-                <referencedProperty name="PHPUnit\Framework\TestCase::$runTestInSeparateProcess"/>
+                <referencedProperty name="PHPUnit/Framework/TestCase::$backupGlobals"/>
+                <referencedProperty name="PHPUnit/Framework/TestCase::$backupStaticAttributes"/>
+                <referencedProperty name="PHPUnit/Framework/TestCase::$runTestInSeparateProcess"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
 
         <RedundantConditionGivenDocblockType>
             <errorLevel type="suppress">
                 <!-- DocBlocks are part of documentation. It doesn't mean users won't pass wrong types -->
-                <file name="src\EntityManager\TypedEntityManager.php"/>
+                <file name="src/EntityManager/TypedEntityManager.php"/>
             </errorLevel>
         </RedundantConditionGivenDocblockType>
 
         <!-- https://github.com/sebastianbergmann/phpunit/issues/3742 -->
         <InternalMethod>
             <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn"/>
-                <referencedMethod name="PHPUnit\Framework\TestCase::__construct"/>
+                <referencedMethod name="PHPUnit/Framework/MockObject/Builder/InvocationMocker::willReturn"/>
+                <referencedMethod name="PHPUnit/Framework/TestCase::__construct"/>
             </errorLevel>
         </InternalMethod>
     </issueHandlers>
