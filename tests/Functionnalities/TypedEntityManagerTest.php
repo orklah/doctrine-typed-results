@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functionnalities;
+namespace Tests\Functionnalities;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Configuration;

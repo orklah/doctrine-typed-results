@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DoctrineCompatibility;
+namespace Tests\DoctrineCompatibility;
 
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
