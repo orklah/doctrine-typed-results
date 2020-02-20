@@ -1,6 +1,10 @@
 name: CI-PHP8
 
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - "master"
 
 env:
   PHP_CS_IGNOR: "PHP_CS_FIXER_IGNORE_ENV=1"
