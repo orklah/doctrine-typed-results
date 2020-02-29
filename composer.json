@@ -18,9 +18,9 @@
         "phpstan/phpstan-doctrine": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12",
         "thecodingmachine/phpstan-strict-rules": "^0.12",
-        "vimeo/psalm": "^3.8",
-        "phpunit/phpunit": "^8.5",
-        "weirdan/doctrine-psalm-plugin": "^0.9"
+        "vimeo/psalm": "^3.9",
+        "phpunit/phpunit": "^9.0",
+        "weirdan/doctrine-psalm-plugin": "^0.10"
     },
     "autoload": {
         "psr-4": {
