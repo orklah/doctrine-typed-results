@@ -256,6 +256,7 @@ trait TypedQueryBuilderTrait
      */
     public function getRootAlias()
     {
+        /** @psalm-suppress DeprecatedMethod Intentional use to ensure functionnality */
         return $this->getQueryBuilder()->getRootAlias();
     }
 
