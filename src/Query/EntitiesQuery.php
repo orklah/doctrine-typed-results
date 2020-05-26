@@ -57,6 +57,7 @@ class EntitiesQuery extends TypedQuery
 
     /**
      * @internal
+     * @param int|string|null $hydrationMode
      */
     public function getSingleResult($hydrationMode = self::HYDRATE_OBJECT)
     {
