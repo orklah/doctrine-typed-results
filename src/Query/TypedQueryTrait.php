@@ -134,6 +134,8 @@ trait TypedQueryTrait
 
     /**
      * @return void
+     *
+     * @psalm-suppress ImplementedReturnTypeMismatch forbidden function, marked as void to prevent usage
      */
     protected function _doExecute()
     {

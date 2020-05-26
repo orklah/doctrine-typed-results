@@ -326,7 +326,7 @@ trait TypedQueryBuilderTrait
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFirstResult()
     {
