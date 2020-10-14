@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use DoctrineTypedResults\Query\EntitiesQuery;
 
 /**
- * @template Entity
+ * @template Entity of object
  */
 class EntitiesQueryBuilder extends TypedQueryBuilder
 {

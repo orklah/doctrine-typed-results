@@ -12,7 +12,7 @@ use DoctrineTypedResults\QueryBuilder\EntitiesQueryBuilder;
 use DoctrineTypedResults\QueryBuilder\TypedQueryBuilder;
 
 /**
- * @template Entity
+ * @template Entity of object
  */
 class TypedPaginator
 {

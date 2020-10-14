@@ -295,7 +295,7 @@ class TypedEntityManager
     }
 
     /**
-     * @template Entity
+     * @template Entity of object
      *
      * @psalm-param class-string<Entity> $entityName
      *
@@ -308,7 +308,7 @@ class TypedEntityManager
     }
 
     /**
-     * @template Entity
+     * @template Entity of object
      *
      * @param class-string<Entity> $entityName
      *
