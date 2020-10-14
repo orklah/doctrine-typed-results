@@ -9,7 +9,7 @@ use Doctrine\ORM\Query;
 use Webmozart\Assert\Assert;
 
 /**
- * @template Entity
+ * @template Entity of object
  */
 class EntitiesQuery extends TypedQuery
 {
@@ -42,6 +42,7 @@ class EntitiesQuery extends TypedQuery
     {
         Assert::same($hydrationMode, self::HYDRATE_OBJECT);
         $result = $this->query->getResult($hydrationMode);
+        Assert::isArray($result);
         Assert::allIsInstanceOf($result, $this->type);
 
         return $result;

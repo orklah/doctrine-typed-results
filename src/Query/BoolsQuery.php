@@ -18,7 +18,8 @@ class BoolsQuery extends TypedQuery
     {
         Assert::same($hydrationMode, self::HYDRATE_ARRAY);
         $result =  parent::getResult($hydrationMode);
-        Assert::allNumeric($result);
+        Assert::isArray($result);
+        Assert::allBoolean($result);
 
         return $result;
     }

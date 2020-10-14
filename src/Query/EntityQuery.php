@@ -14,7 +14,7 @@ use function gettype;
 use function is_string;
 
 /**
- * @template Entity
+ * @template Entity of object
  */
 class EntityQuery extends TypedQuery
 {

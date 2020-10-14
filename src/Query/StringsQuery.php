@@ -18,7 +18,8 @@ class StringsQuery extends TypedQuery
     {
         Assert::same($hydrationMode, self::HYDRATE_ARRAY);
         $result =  parent::getResult($hydrationMode);
-        Assert::allIntegerish($result);
+        Assert::isArray($result);
+        Assert::allString($result);
 
         return $result;
     }

@@ -18,6 +18,7 @@ class IntsQuery extends TypedQuery
     {
         Assert::same($hydrationMode, self::HYDRATE_ARRAY);
         $result =  parent::getResult($hydrationMode);
+        Assert::isArray($result);
         Assert::allIntegerish($result);
 
         return array_map('\intval', $result);// The cast is needed because Doctrine may return numeric values
